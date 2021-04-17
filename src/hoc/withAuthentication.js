@@ -1,4 +1,6 @@
 import React, { useEffect, useContext } from 'react';
+import { connect } from 'react-redux';
+import { setAuthUser } from './../actions';
 
 import FirebaseContext from './../context/firebase';
 
@@ -10,14 +12,23 @@ const withAuthentication = (Component) => {
       localStorage.setItem('authUser', JSON.stringify(authUser));
     };
 
+    const next = (authUser) => {
+      saveToLocalStorage(authUser);
+      props.setAuthUser(authUser);
+    };
+
     useEffect(() => {
-      firebase.onAuthChangeListener(saveToLocalStorage);
+      const user = localStorage.getItem('authUser');
+      props.setAuthUser(user);
+      firebase.onAuthChangeListener(next);
+
+      // eslint-disable-next-line
     }, []);
 
     return <Component {...props} />;
   };
 
-  return UpdatedComponent;
+  return connect(null, { setAuthUser })(UpdatedComponent);
 };
 
 export default withAuthentication;

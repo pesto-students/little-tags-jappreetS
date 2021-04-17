@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import reportWebVitals from './reportWebVitals';
 import FirebaseContext from './context/firebase';
 import Firebase from './classes/firebase';
-import store from './store';
-import reportWebVitals from './reportWebVitals';
+import rootStore from './store';
 
 import App from './containers';
+
+const { store } = rootStore;
 
 ReactDOM.render(
   <React.StrictMode>
