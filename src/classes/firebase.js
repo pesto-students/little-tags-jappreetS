@@ -17,9 +17,7 @@ class Firebase {
     this.googleAuthProvider = new app.auth.GoogleAuthProvider();
   }
 
-  doGoogleSignIn = () => {
-    this.auth.signInWithPopup(this.googleAuthProvider);
-  };
+  doGoogleSignIn = () => this.auth.signInWithPopup(this.googleAuthProvider);
 
   user = (uid) => this.db.ref(`user/${uid}`);
 }
