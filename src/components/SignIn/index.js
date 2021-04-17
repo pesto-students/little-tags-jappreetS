@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import FirebaseContext from './../../context/firebase';
 
-const Login = () => {
+const SignIn = () => {
   const firebase = useContext(FirebaseContext);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -9,7 +9,6 @@ const Login = () => {
     firebase
       .doGoogleSignIn()
       .then((authUser) => {
-        console.log('authUser::: ', authUser);
         firebase.user(authUser.user.uid).set({
           email: authUser.user.email,
           username: getUserName(authUser.additionalUserInfo.profile),
@@ -34,4 +33,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
