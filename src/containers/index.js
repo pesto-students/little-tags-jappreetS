@@ -1,5 +1,7 @@
 import React from 'react';
 
+import withAuthentication from './../hoc/withAuthentication';
+
 import Login from './../components/Login';
 
 const App = () => {
@@ -11,4 +13,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAuthentication(App);

@@ -20,6 +20,27 @@ class Firebase {
   doGoogleSignIn = () => this.auth.signInWithPopup(this.googleAuthProvider);
 
   user = (uid) => this.db.ref(`user/${uid}`);
+
+  onAuthChangeListener = (next) => {
+    return this.auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        this.user(authUser.uid)
+          .once('value')
+          .then((snapshot) => {
+            const dbUser = snapshot.val();
+            const user = {
+              uid: authUser.uid,
+              email: authUser.email,
+              emailVerified: authUser.emailVerified,
+              ...dbUser,
+            };
+            next(user);
+          });
+      } else {
+        // TODO: handle case if user is not logged in
+      }
+    });
+  };
 }
 
 export default Firebase;
