@@ -27,20 +27,27 @@ const Header = (props) => {
         !!isHome ? 'white' : 'black'
       }`}
     >
-      <div className="d-flex align-items-center">
-        <Icon className="mr-16" name="hamburger" />
-        <h1
-          className="title cursor-pointer"
+      <div className="Header-left d-flex align-items-center">
+        <Icon className="mr-16" name="hamburger" width={32} height={32} />
+        <div
+          role="button"
+          className="Header-left__title cursor-pointer"
           onClick={() => setIsHeadingClick(true)}
         >
           Little Tags
-        </h1>
+        </div>
       </div>
       {/* Search Bar */}
       <div className="Header-right d-flex align-items-center">
         {!!firstName ? (
           <>
-            <Icon className="mr-16" isClickable={false} name="user" />
+            <Icon
+              className="mr-16"
+              isClickable={false}
+              name="user"
+              width={32}
+              height={32}
+            />
             <div className="Header-right__name">{firstName}</div>
           </>
         ) : (
@@ -50,7 +57,7 @@ const Header = (props) => {
             path={SIGN_IN}
           />
         )}
-        <Icon className="ml-16" name="cart" />
+        <Icon className="ml-16" name="cart" width={32} height={32} />
       </div>
       {!!isHeadingClick && <Redirect to={HOME} />}
     </div>
