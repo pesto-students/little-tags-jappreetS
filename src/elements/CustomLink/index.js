@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 
 import './CustomLink.scss';
 
-const CustomLink = ({ path, label }) => {
+const CustomLink = ({ className, path, label }) => {
   return (
-    <Link to={path} className="CustomLink color-black">
+    <Link
+      to={path}
+      className={`CustomLink color-black ${!!className ? className : ''}`}
+    >
       {label}
     </Link>
   );

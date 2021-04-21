@@ -5,11 +5,11 @@ import * as ROUTES from './../constants/routes';
 
 import withAuthentication from './../hoc/withAuthentication';
 import Home from './Home';
+import SignIn from './SignIn';
 import WishList from './WishList';
 
 import Footer from './../components/Footer';
 import Header from './../components/Header';
-import SignIn from './../components/SignIn';
 
 import './../global/styles/common.scss';
 
