@@ -1,25 +1,23 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import * as ROUTES from './../constants/routes';
 
 import withAuthentication from './../hoc/withAuthentication';
 import Home from './Home';
+import SignIn from './SignIn';
 import WishList from './WishList';
 
 import Footer from './../components/Footer';
 import Header from './../components/Header';
-import Navigation from './../components/Navigation';
-import SignIn from './../components/SignIn';
+
+import './../global/styles/common.scss';
 
 const App = () => {
   return (
     <div>
       <Header />
-      <h1>LITTLE TAGS</h1>
-      <BrowserRouter>
-        <Navigation />
-        <hr />
+      <div className="container">
         <Switch>
           <Route exact path={ROUTES.HOME}>
             <Home />
@@ -31,7 +29,7 @@ const App = () => {
             <WishList />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </div>
       <Footer />
     </div>
   );
