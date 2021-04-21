@@ -1,7 +1,11 @@
 import React, { useState, useContext } from 'react';
+import Button from '../Button';
+
 import FirebaseContext from './../../context/firebase';
 
-const SignIn = () => {
+import './SignInBox.scss';
+
+const SignInBox = () => {
   const firebase = useContext(FirebaseContext);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -25,12 +29,21 @@ const SignIn = () => {
   };
 
   return (
-    <div>
-      <h3>Sign In page</h3>
-      <button onClick={handleGoogleSignIn}>Sign In with Google</button>
+    <div className="SignInBox d-flex flex-direction-col align-items-center">
+      <h2>Log in / Sign up</h2>
+      <p className="SignInBox-info">Log in / Sign up using your</p>
+      <Button
+        altIcon="Google"
+        iconName="google"
+        isBlack={false}
+        isFullWidth
+        label="Google Account"
+        varient="primary"
+        onClick={handleGoogleSignIn}
+      />
       {!!errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 };
 
-export default SignIn;
+export default SignInBox;
