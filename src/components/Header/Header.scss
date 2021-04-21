@@ -2,4 +2,11 @@ $root: '.Header';
 
 #{$root} {
   padding: 32px 48px;
+
+  &-right {
+    &__name,
+    &__link {
+      font-size: 24px;
+    }
+  }
 }

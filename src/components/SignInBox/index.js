@@ -1,13 +1,17 @@
 import React, { useState, useContext } from 'react';
-import Button from '../Button';
+import { Redirect } from 'react-router-dom';
 
+import { HOME } from './../../constants/routes';
 import FirebaseContext from './../../context/firebase';
+
+import Button from './../Button';
 
 import './SignInBox.scss';
 
 const SignInBox = () => {
   const firebase = useContext(FirebaseContext);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleGoogleSignIn = () => {
     firebase
@@ -18,6 +22,7 @@ const SignInBox = () => {
           username: getUserName(authUser.additionalUserInfo.profile),
           displayName: authUser.user.displayName,
         });
+        setIsLogin(true);
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -42,6 +47,7 @@ const SignInBox = () => {
         onClick={handleGoogleSignIn}
       />
       {!!errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {!!isLogin && <Redirect to={HOME} />}
     </div>
   );
 };
