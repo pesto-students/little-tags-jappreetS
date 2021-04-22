@@ -1,0 +1,40 @@
+$root: '.SideMenu';
+
+#{$root} {
+  position: fixed;
+  top: 0;
+  width: 30%;
+  min-width: 300px;
+  height: 100vh;
+  display: flex;
+  padding: 20px;
+  z-index: 99;
+  background-color: #fff;
+  box-shadow: 2px 0 6px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 0 20px 20px 0;
+  transition: 0.5s;
+  color: #000;
+
+  &-open {
+    left: 0;
+  }
+
+  &-close {
+    left: -500px;
+  }
+
+  &-top {
+    margin-bottom: 20px;
+
+    &__title {
+      font-size: 30px;
+    }
+  }
+
+  &-user {
+    background-color: black;
+    padding: 12px 20px;
+    margin: 0 -20px;
+    color: #fff;
+  }
+}
