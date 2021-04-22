@@ -76,6 +76,7 @@ const Header = (props) => {
         isSideMenuOpen={isSideMenuOpen}
         handleCloseSideMenu={setIsSideMenuOpen}
       />
+      {!!isSideMenuOpen && <div className="overlay-dark" />}
     </div>
   );
 };
