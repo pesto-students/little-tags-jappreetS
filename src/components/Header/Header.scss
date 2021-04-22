@@ -2,7 +2,12 @@ $root: '.Header';
 
 #{$root} {
   padding: 20px 48px;
-  border-bottom: 1px solid #ccc;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: transparent;
+  z-index: 9;
 
   &-left {
     &__title {
