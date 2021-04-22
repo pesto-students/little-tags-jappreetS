@@ -19,9 +19,11 @@ class Firebase {
 
   doGoogleSignIn = () => this.auth.signInWithPopup(this.googleAuthProvider);
 
+  doSignOut = () => this.auth.signOut();
+
   user = (uid) => this.db.ref(`user/${uid}`);
 
-  onAuthChangeListener = (next) => {
+  onAuthChangeListener = (next, fallback = () => {}) => {
     return this.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         this.user(authUser.uid)
@@ -37,7 +39,7 @@ class Firebase {
             next(user);
           });
       } else {
-        // TODO: handle case if user is not logged in
+        fallback();
       }
     });
   };

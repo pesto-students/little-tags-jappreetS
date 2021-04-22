@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
-import Button from '../Button';
-import Icon from '../../elements/Icon';
+import FirebaseContext from './../../context/firebase';
+
+import Button from './../Button';
+import Icon from './../../elements/Icon';
 
 import './SideMenu.scss';
 
@@ -10,6 +12,7 @@ const SideMenu = ({
   userFirstName,
   handleCloseSideMenu,
 }) => {
+  const firebase = useContext(FirebaseContext);
   const [isOpen, setIsOpen] = useState(isSideMenuOpen);
 
   useEffect(() => {
@@ -21,6 +24,11 @@ const SideMenu = ({
   const handleCloseSideMenuClick = () => {
     setIsOpen(false);
     handleCloseSideMenu(false);
+  };
+
+  const handleSignOut = () => {
+    firebase.doSignOut();
+    handleCloseSideMenuClick();
   };
 
   return (
@@ -39,18 +47,27 @@ const SideMenu = ({
           />
           <span className="SideMenu-top__title">Little Tags</span>
         </div>
-        <div className="SideMenu-user d-flex align-items-center">
-          <Icon
-            className="mr-16"
-            name="user"
-            isBlack={false}
-            width="24px"
-            height="24px"
-          />
-          <span>Hey, {userFirstName}</span>
-        </div>
+        {!!userFirstName && (
+          <div className="SideMenu-user d-flex align-items-center">
+            <Icon
+              className="mr-16"
+              name="user"
+              isBlack={false}
+              width="24px"
+              height="24px"
+            />
+            <span>Hey, {userFirstName}</span>
+          </div>
+        )}
       </div>
-      <Button isFullWidth label="Logout" varient="ternary" onClick={() => {}} />
+      {!!userFirstName && (
+        <Button
+          isFullWidth
+          label="Logout"
+          varient="ternary"
+          onClick={handleSignOut}
+        />
+      )}
     </div>
   );
 };

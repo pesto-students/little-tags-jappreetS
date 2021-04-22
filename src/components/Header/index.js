@@ -21,6 +21,8 @@ const Header = (props) => {
     if (!!authUser && !!authUser.displayName) {
       const { displayName } = authUser;
       setFirstName(displayName.split(' ')[0]);
+    } else {
+      setFirstName('');
     }
   }, [authUser]);
 
@@ -70,7 +72,7 @@ const Header = (props) => {
       </div>
       {!!isHeadingClick && <Redirect to={HOME} />}
       <SideMenu
-        userFirstName={!!firstName && firstName}
+        userFirstName={!!firstName ? firstName : ''}
         isSideMenuOpen={isSideMenuOpen}
         handleCloseSideMenu={setIsSideMenuOpen}
       />
