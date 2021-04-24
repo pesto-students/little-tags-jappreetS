@@ -17,10 +17,15 @@ const withAuthentication = (Component) => {
       props.setAuthUser(authUser);
     };
 
+    const fallback = () => {
+      localStorage.removeItem('authUser');
+      props.setAuthUser(null);
+    };
+
     useEffect(() => {
       const user = localStorage.getItem('authUser');
       props.setAuthUser(user);
-      firebase.onAuthChangeListener(next);
+      firebase.onAuthChangeListener(next, fallback);
 
       // eslint-disable-next-line
     }, []);

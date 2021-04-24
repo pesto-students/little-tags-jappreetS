@@ -2,13 +2,20 @@ $root: '.Button';
 
 #{$root} {
   border-radius: 10px;
+  border: none;
   &-primary {
     background-color: black;
-    border: none;
     border-radius: 20px;
     padding: 14px 0;
     color: #fff;
     font-size: 24px;
+  }
+  &-ternary {
+    background-color: #ebebeb;
+    border-radius: 5px;
+    padding: 12px 0;
+    color: #000;
+    font-size: 20px;
   }
   &-width-full {
     width: 100%;
