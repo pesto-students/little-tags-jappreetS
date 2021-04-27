@@ -16,7 +16,6 @@ h2 {
   max-width: 1200px;
   margin: 0 auto;
   padding: 72px 0;
-  height: 100vh;
 }
 
 // Flex Helper Classes
@@ -40,6 +39,10 @@ h2 {
   align-items: center;
 }
 
+.align-self-end {
+  align-self: flex-end;
+}
+
 // Color Helper Classes
 .color-white {
   color: #fff;
@@ -61,4 +64,18 @@ h2 {
 // Miscellaneous
 .cursor-pointer {
   cursor: pointer;
+}
+
+.overlay-dark {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 2;
+}
+
+.text-align-center {
+  text-align: center;
 }
