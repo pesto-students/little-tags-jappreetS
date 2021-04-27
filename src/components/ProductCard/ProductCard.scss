@@ -1,0 +1,29 @@
+$root: '.ProductCard';
+
+#{$root} {
+  border-radius: 20px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &.primary {
+    height: 250px;
+    max-width: 50%;
+  }
+  &.secondary {
+    height: 540px;
+    max-width: 25%;
+  }
+  &.ternary {
+    height: 450px;
+  }
+  &-caption {
+    width: 100%;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.41);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-size: 24px;
+    color: #fff;
+    padding: 0 32px;
+  }
+}
