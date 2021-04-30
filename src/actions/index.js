@@ -1,8 +1,20 @@
-import { SET_AUTH_USER } from './../constants/actionTypes';
+import {
+  SET_AUTH_USER,
+  UPDATE_SIDE_MENU_STATE,
+} from './../constants/actionTypes';
 
-const setAuthUser = (authUser) => ({
-  type: SET_AUTH_USER,
-  payload: authUser,
-});
+const setAuthUser = (authUser) => {
+  return {
+    type: SET_AUTH_USER,
+    payload: authUser,
+  };
+};
 
-export { setAuthUser };
+const updateSideMenuState = (state) => {
+  return {
+    type: UPDATE_SIDE_MENU_STATE,
+    payload: state,
+  };
+};
+
+export { setAuthUser, updateSideMenuState };

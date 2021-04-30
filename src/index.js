@@ -8,7 +8,7 @@ import FirebaseContext from './context/firebase';
 import Firebase from './classes/firebase';
 import rootStore from './store';
 
-import App from './containers';
+import App from './containers/App';
 
 const { store } = rootStore;
 

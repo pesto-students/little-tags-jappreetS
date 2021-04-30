@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { HOME, SIGN_IN } from './../../constants/routes';
+import { CART, HOME, SIGN_IN } from './../../constants/routes';
+
+import { updateSideMenuState } from './../../actions';
 
 import SideMenu from './../SideMenu';
 
@@ -12,10 +15,9 @@ import Icon from './../../elements/Icon';
 import './Header.scss';
 
 const Header = (props) => {
-  const { authUser, isHome } = props;
+  const { authUser, isHome, isSideMenuOpen, updateSideMenuState } = props;
+  const history = useHistory();
   const [firstName, setFirstName] = useState('');
-  const [isHeadingClick, setIsHeadingClick] = useState(false);
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!!authUser && !!authUser.displayName) {
@@ -38,12 +40,12 @@ const Header = (props) => {
           name="hamburger"
           width={32}
           height={32}
-          onClick={() => setIsSideMenuOpen(true)}
+          onClick={() => updateSideMenuState(true)}
         />
         <div
           role="button"
           className="Header-left__title cursor-pointer"
-          onClick={() => setIsHeadingClick(true)}
+          onClick={() => history.push(HOME)}
         >
           Little Tags
         </div>
@@ -68,14 +70,15 @@ const Header = (props) => {
             path={SIGN_IN}
           />
         )}
-        <Icon className="ml-16" name="cart" width={32} height={32} />
+        <Icon
+          className="ml-16"
+          name="cart"
+          width={32}
+          height={32}
+          onClick={() => history.push(CART)}
+        />
       </div>
-      {!!isHeadingClick && <Redirect to={HOME} />}
-      <SideMenu
-        userFirstName={!!firstName ? firstName : ''}
-        isSideMenuOpen={isSideMenuOpen}
-        handleCloseSideMenu={setIsSideMenuOpen}
-      />
+      <SideMenu userFirstName={!!firstName ? firstName : ''} />
       {!!isSideMenuOpen && <div className="overlay-dark" />}
     </div>
   );
@@ -83,6 +86,11 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => ({
   authUser: state.sessionState.authUser,
+  isSideMenuOpen: state.sideMenuSate.isSideMenuOpen,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ updateSideMenuState }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

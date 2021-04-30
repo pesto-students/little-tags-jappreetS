@@ -1,0 +1,24 @@
+$root: '.Pagination';
+
+#{$root} {
+  padding: 40px 0;
+  &-btn {
+    height: 40px;
+    font-size: 20px;
+    color: #707070;
+    border: 1px solid #707070;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0 12px;
+    margin: 0 10px;
+    cursor: pointer;
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    &.active {
+      background-color: #707070;
+      color: #fff;
+    }
+  }
+}

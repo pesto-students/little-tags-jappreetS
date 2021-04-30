@@ -4,7 +4,10 @@ import { Switch, Route } from 'react-router-dom';
 import * as ROUTES from './../constants/routes';
 
 import withAuthentication from './../hoc/withAuthentication';
+
+import Cart from './Cart';
 import Home from './Home';
+import ProductsList from './ProductsList';
 import SignIn from './SignIn';
 import WishList from './WishList';
 
@@ -19,14 +22,20 @@ const App = () => {
       <Header />
       <div className="container">
         <Switch>
-          <Route exact path={ROUTES.HOME}>
-            <Home />
-          </Route>
           <Route path={ROUTES.SIGN_IN}>
             <SignIn />
           </Route>
           <Route path={ROUTES.WISH_LIST}>
             <WishList />
+          </Route>
+          <Route path={`${ROUTES.PRODUCT_LIST}/:id`}>
+            <ProductsList />
+          </Route>
+          <Route path={`${ROUTES.CART}`}>
+            <Cart />
+          </Route>
+          <Route path={ROUTES.HOME}>
+            <Home />
           </Route>
         </Switch>
       </div>
