@@ -5,6 +5,7 @@ import * as ROUTES from './../constants/routes';
 
 import withAuthentication from './../hoc/withAuthentication';
 
+import Cart from './Cart';
 import Home from './Home';
 import ProductsList from './ProductsList';
 import SignIn from './SignIn';
@@ -32,6 +33,9 @@ const App = () => {
           </Route>
           <Route path={`${ROUTES.PRODUCT_LIST}/:id`}>
             <ProductsList />
+          </Route>
+          <Route path={`${ROUTES.CART}`}>
+            <Cart />
           </Route>
         </Switch>
       </div>

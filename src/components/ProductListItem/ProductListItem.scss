@@ -2,14 +2,24 @@ $root: '.ProductListItem';
 
 #{$root} {
   height: 220px;
-  box-shadow: 0 0 16px rgba(40, 44, 181, 0.16);
-  border-radius: 20px;
-  padding: 20px 60px 25px 25px;
+  padding: 0 60px 0 25px;
   margin-bottom: 20px;
+  &.show-border {
+    box-shadow: 0 0 16px rgba(40, 44, 181, 0.16);
+    border-radius: 20px;
+    padding: 20px 60px 20px 25px;
+    .ProductListItem {
+      &-left {
+        &__productImg {
+          height: 180px;
+        }
+      }
+    }
+  }
   &-left {
     &__productImg {
-      width: 225px;
-      height: 180px;
+      width: 230px;
+      height: 220px;
       margin-right: 24px;
       img {
         width: 100%;
