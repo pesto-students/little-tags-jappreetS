@@ -1,5 +1,7 @@
 {
   "name": "little-tags",
+  "author": "Jappreet Singh",
+  "repository": "https://github.com/pesto-students/little-tags-jappreetS",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

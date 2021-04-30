@@ -12,8 +12,6 @@
 # misc
 .DS_Store
 
-package-lock.json
-
 .eslintcache
 
 #environments
