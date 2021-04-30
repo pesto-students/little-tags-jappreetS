@@ -22,9 +22,6 @@ const App = () => {
       <Header />
       <div className="container">
         <Switch>
-          <Route exact path={ROUTES.HOME}>
-            <Home />
-          </Route>
           <Route path={ROUTES.SIGN_IN}>
             <SignIn />
           </Route>
@@ -36,6 +33,9 @@ const App = () => {
           </Route>
           <Route path={`${ROUTES.CART}`}>
             <Cart />
+          </Route>
+          <Route path={ROUTES.HOME}>
+            <Home />
           </Route>
         </Switch>
       </div>
