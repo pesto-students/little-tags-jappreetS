@@ -1,0 +1,28 @@
+$root: '.ProductListItem';
+
+#{$root} {
+  height: 220px;
+  box-shadow: 0 0 16px rgba(40, 44, 181, 0.16);
+  border-radius: 20px;
+  padding: 20px 60px 25px 25px;
+  margin-bottom: 20px;
+  &-left {
+    &__productImg {
+      width: 225px;
+      height: 180px;
+      margin-right: 24px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+      }
+    }
+    &__productName {
+      font-size: 24px;
+    }
+  }
+  &-right {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}

@@ -4,7 +4,9 @@ import { Switch, Route } from 'react-router-dom';
 import * as ROUTES from './../constants/routes';
 
 import withAuthentication from './../hoc/withAuthentication';
+
 import Home from './Home';
+import ProductsList from './ProductsList';
 import SignIn from './SignIn';
 import WishList from './WishList';
 
@@ -27,6 +29,9 @@ const App = () => {
           </Route>
           <Route path={ROUTES.WISH_LIST}>
             <WishList />
+          </Route>
+          <Route path={`${ROUTES.PRODUCT_LIST}/:id`}>
+            <ProductsList />
           </Route>
         </Switch>
       </div>
