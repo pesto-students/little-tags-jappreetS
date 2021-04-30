@@ -1,29 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { updateSideMenuState } from './../../actions';
 
 import FirebaseContext from './../../context/firebase';
+import { CATEGORIES } from './../../constants';
+import { PRODUCT_LIST } from './../../constants/routes';
 
 import Button from './../Button';
 import Icon from './../../elements/Icon';
 
 import './SideMenu.scss';
 
-const SideMenu = ({
-  isSideMenuOpen = false,
-  userFirstName,
-  handleCloseSideMenu,
-}) => {
+const SideMenu = (props) => {
+  const { userFirstName, isSideMenuOpen, updateSideMenuState } = props;
   const firebase = useContext(FirebaseContext);
   const [isOpen, setIsOpen] = useState(isSideMenuOpen);
 
   useEffect(() => {
     setIsOpen(isSideMenuOpen);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSideMenuOpen]);
 
   const handleCloseSideMenuClick = () => {
     setIsOpen(false);
-    handleCloseSideMenu(false);
+    updateSideMenuState(false);
   };
 
   const handleSignOut = () => {
@@ -31,24 +33,32 @@ const SideMenu = ({
     handleCloseSideMenuClick();
   };
 
+  const categories = CATEGORIES.map(({ id, label }) => (
+    <li key={id}>
+      <Link to={`${PRODUCT_LIST}/${id}`} onClick={handleCloseSideMenuClick}>
+        {label}
+      </Link>
+    </li>
+  ));
+
   return (
     <div
       className={`SideMenu d-flex flex-direction-col justify-content-between SideMenu-${
         !!isOpen ? 'open' : 'close'
       }`}
     >
-      <div>
-        <div className="SideMenu-top d-flex justify-content-between align-items-center">
+      <div className="SideMenu-top">
+        <div className="SideMenu-top__title d-flex justify-content-between align-items-center">
           <Icon
             name="close"
             width="24"
             height="24"
             onClick={handleCloseSideMenuClick}
           />
-          <span className="SideMenu-top__title">Little Tags</span>
+          <span className="title">Little Tags</span>
         </div>
         {!!userFirstName && (
-          <div className="SideMenu-user d-flex align-items-center">
+          <div className="SideMenu-top__user d-flex align-items-center">
             <Icon
               className="mr-16"
               name="user"
@@ -59,6 +69,10 @@ const SideMenu = ({
             <span>Hey, {userFirstName}</span>
           </div>
         )}
+        <div className="SideMenu-top__categories">
+          <div className="categoriesTitle">CATEGORIES</div>
+          <ul className="categories">{categories}</ul>
+        </div>
       </div>
       {!!userFirstName && (
         <Button
@@ -72,4 +86,12 @@ const SideMenu = ({
   );
 };
 
-export default SideMenu;
+const mapStateToProps = (state) => ({
+  isSideMenuOpen: state.sideMenuSate.isSideMenuOpen,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ updateSideMenuState }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);
