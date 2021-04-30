@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ProductListItem from './../../components/ProductListItem';
+import Pagination from './../../components/Pagination';
 
 import './ProductsList.scss';
 
@@ -12,6 +13,7 @@ const ProductsList = () => {
       <ProductListItem />
       <ProductListItem />
       <ProductListItem />
+      <Pagination currentPage={2} pageCount={6} />
     </div>
   );
 };
