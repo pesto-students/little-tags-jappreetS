@@ -27,12 +27,27 @@ $root: '.ProductListItem';
         border-radius: 20px;
       }
     }
-    &__productName {
-      font-size: 24px;
+    &__productInfo {
+      .name {
+        font-size: 24px;
+      }
+      .add-margin {
+        margin-bottom: 12px;
+      }
+      .price {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+      .order-date {
+        color: #32353c;
+      }
     }
   }
   &-right {
-    font-size: 20px;
-    font-weight: bold;
+    &__productPrice {
+      font-size: 20px;
+      font-weight: bold;
+    }
   }
 }

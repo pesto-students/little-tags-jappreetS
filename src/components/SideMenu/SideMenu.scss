@@ -34,22 +34,33 @@ $root: '.SideMenu';
       margin: 0 -20px;
       color: #fff;
     }
-    &__categories {
+    &__menuItems {
       padding-top: 32px;
       .categoriesTitle {
         font-size: 24px;
         margin-bottom: 20px;
       }
-      ul.categories {
-        list-style-type: none;
-        margin: 0;
+      ul {
         padding: 0;
+        margin: 0;
+      }
+      ul.categories {
+        border-bottom: 1px solid #707070;
+      }
+      ul.categories,
+      ul.other-pages {
+        list-style-type: none;
+        padding: 0 0 24px;
+        margin: 0 0 24px;
         li {
           margin-bottom: 8px;
           a {
             font-size: 18px;
             text-decoration: none;
             color: #000;
+          }
+          &:last-child {
+            margin-bottom: 0;
           }
         }
       }

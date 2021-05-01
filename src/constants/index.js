@@ -20,4 +20,17 @@ const CATEGORIES = [
   },
 ];
 
-export { GITHUB_PROFILE, LINKEDIN_PROFILE, CATEGORIES };
+const SIDE_MENU_OTHER_PAGES = [
+  {
+    id: 'pastOrders',
+    label: 'Past Orders',
+    route: '/past-orders',
+  },
+  {
+    id: 'addAddress',
+    label: 'Add Address',
+    route: '/add-address',
+  },
+];
+
+export { GITHUB_PROFILE, LINKEDIN_PROFILE, CATEGORIES, SIDE_MENU_OTHER_PAGES };

@@ -7,6 +7,7 @@ import withAuthentication from './../hoc/withAuthentication';
 
 import Cart from './Cart';
 import Home from './Home';
+import PastOrders from './PastOrders';
 import ProductsList from './ProductsList';
 import SignIn from './SignIn';
 import WishList from './WishList';
@@ -33,6 +34,12 @@ const App = () => {
           </Route>
           <Route path={`${ROUTES.CART}`}>
             <Cart />
+          </Route>
+          <Route path={ROUTES.ADD_ADDRESS}>
+            <Cart />
+          </Route>
+          <Route path={ROUTES.PAST_ORDERS}>
+            <PastOrders />
           </Route>
           <Route path={ROUTES.HOME}>
             <Home />

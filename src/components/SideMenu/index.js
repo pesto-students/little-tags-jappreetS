@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { updateSideMenuState } from './../../actions';
 
 import FirebaseContext from './../../context/firebase';
-import { CATEGORIES } from './../../constants';
+import { CATEGORIES, SIDE_MENU_OTHER_PAGES } from './../../constants';
 import { PRODUCT_LIST } from './../../constants/routes';
 
 import Button from './../Button';
@@ -41,6 +41,14 @@ const SideMenu = (props) => {
     </li>
   ));
 
+  const otherPages = SIDE_MENU_OTHER_PAGES.map(({ id, label, route }) => (
+    <li key={id}>
+      <Link to={route} onClick={handleCloseSideMenuClick}>
+        {label}
+      </Link>
+    </li>
+  ));
+
   return (
     <div
       className={`SideMenu d-flex flex-direction-col justify-content-between SideMenu-${
@@ -69,15 +77,16 @@ const SideMenu = (props) => {
             <span>Hey, {userFirstName}</span>
           </div>
         )}
-        <div className="SideMenu-top__categories">
+        <div className="SideMenu-top__menuItems">
           <div className="categoriesTitle">CATEGORIES</div>
           <ul className="categories">{categories}</ul>
+          <ul className="other-pages">{otherPages}</ul>
         </div>
       </div>
       {!!userFirstName && (
         <Button
           isFullWidth
-          label="Logout"
+          label="LOGOUT"
           varient="ternary"
           onClick={handleSignOut}
         />
