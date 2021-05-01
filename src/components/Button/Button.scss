@@ -10,14 +10,27 @@ $root: '.Button';
     color: #fff;
     font-size: 24px;
   }
+  &-secondary,
   &-ternary {
-    background-color: #ebebeb;
     border-radius: 5px;
     padding: 12px 0;
-    color: #000;
     font-size: 20px;
+  }
+  &-secondary {
+    background-color: black;
+    color: #fff;
+  }
+  &-ternary {
+    background-color: #ebebeb;
+    color: #000;
   }
   &-width-full {
     width: 100%;
+  }
+  &-width-limit {
+    width: 300px;
+  }
+  &-isCenter {
+    margin: 0 auto;
   }
 }

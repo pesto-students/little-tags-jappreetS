@@ -1,16 +1,19 @@
 import React from 'react';
 
-import ProductListItem from '../../components/ProductListItem';
-// import Pagination from '../../components/Pagination';
+import Button from './../../components/Button';
+import ProductListItem from './../../components/ProductListItem';
 
 import './Cart.scss';
 
 const Cart = () => {
   return (
     <div className="Cart">
-      <h2 className="Cart-title text-align-center">My Cart</h2>
-      <ProductListItem showBorder={false} showCounter />
-      <ProductListItem showBorder={false} showCounter />
+      <h1 className="Cart-title text-align-center">My Cart</h1>
+      <div className="Cart-itemsList">
+        <ProductListItem showBorder={false} showCounter />
+        <ProductListItem showBorder={false} showCounter />
+      </div>
+      <Button isCenter label="PROCEED" varient="secondary" onClick={() => {}} />
     </div>
   );
 };
