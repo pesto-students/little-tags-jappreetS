@@ -1,0 +1,25 @@
+$root: '.Header';
+
+#{$root} {
+  padding: 20px 48px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: transparent;
+  z-index: 9;
+
+  &-left {
+    &__title {
+      font-size: 28px;
+      font-weight: bold;
+    }
+  }
+
+  &-right {
+    &__name,
+    &__link {
+      font-size: 20px;
+    }
+  }
+}

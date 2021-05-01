@@ -1,0 +1,58 @@
+$root: '.SideMenu';
+
+#{$root} {
+  position: fixed;
+  top: 0;
+  width: 30%;
+  min-width: 300px;
+  height: 100vh;
+  display: flex;
+  padding: 20px 32px;
+  z-index: 99;
+  background-color: #fff;
+  box-shadow: 2px 0 6px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 0 20px 20px 0;
+  transition: 0.5s;
+  color: #000;
+  z-index: 9;
+  &-open {
+    left: 0;
+  }
+  &-close {
+    left: -500px;
+  }
+  &-top {
+    &__title {
+      margin-bottom: 20px;
+      .title {
+        font-size: 30px;
+      }
+    }
+    &__user {
+      background-color: black;
+      padding: 12px 20px;
+      margin: 0 -20px;
+      color: #fff;
+    }
+    &__categories {
+      padding-top: 32px;
+      .categoriesTitle {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      ul.categories {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+          margin-bottom: 8px;
+          a {
+            font-size: 18px;
+            text-decoration: none;
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}
