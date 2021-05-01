@@ -8,7 +8,7 @@ import './ProductsList.scss';
 const ProductsList = () => {
   return (
     <div className="ProductsList">
-      <h2 className="ProductsList-title text-align-center">Products List</h2>
+      <h1 className="ProductsList-title text-align-center">Products List</h1>
       <ProductListItem />
       <ProductListItem />
       <ProductListItem />
