@@ -5,6 +5,7 @@ const PRODUCT_LIST = '/product-list';
 const CART = '/cart';
 const ADD_ADDRESS = '/add-address';
 const PAST_ORDERS = '/past-orders';
+const THANK_YOU = '/thank-you';
 
 export {
   HOME,
@@ -14,4 +15,5 @@ export {
   CART,
   ADD_ADDRESS,
   PAST_ORDERS,
+  THANK_YOU,
 };

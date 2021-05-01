@@ -10,6 +10,7 @@ import Home from './Home';
 import PastOrders from './PastOrders';
 import ProductsList from './ProductsList';
 import SignIn from './SignIn';
+import ThankYou from './ThankYou';
 import WishList from './WishList';
 
 import Footer from './../components/Footer';
@@ -40,6 +41,9 @@ const App = () => {
           </Route>
           <Route path={ROUTES.PAST_ORDERS}>
             <PastOrders />
+          </Route>
+          <Route path={ROUTES.THANK_YOU}>
+            <ThankYou />
           </Route>
           <Route path={ROUTES.HOME}>
             <Home />
