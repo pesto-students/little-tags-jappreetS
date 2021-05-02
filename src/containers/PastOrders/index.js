@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ProductListItem from './../../components/ProductListItem';
+import PopularProducts from '../../components/PopularProducts';
 
 import './PastOrders.scss';
 
@@ -22,6 +23,7 @@ const PastOrders = () => {
           isPastOrder
         />
       </div>
+      <PopularProducts />
     </div>
   );
 };

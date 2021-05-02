@@ -2,8 +2,8 @@ import React from 'react';
 
 import Button from '../../components/Button';
 import Counter from '../../components/Counter';
-import ProductCard from '../../components/ProductCard';
 import ProductSlider from '../../components/ProductSlider';
+import PopularProducts from '../../components/PopularProducts';
 
 import img1 from './../../global/assets/images/product-1@2x.png';
 import img2 from './../../global/assets/images/product-2@2x.png';
@@ -93,15 +93,7 @@ const ProductDetail = () => {
         </div>
       </div>
       <div className="ProductDetail-popularProducts">
-        <div className="ProductDetail-popularProducts__title text-align-center">
-          More you'll like
-        </div>
-        <div className="ProductDetail-popularProducts__products d-flex justify-content-between">
-          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
-          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
-          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
-          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
-        </div>
+        <PopularProducts />
       </div>
     </div>
   );
