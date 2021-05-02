@@ -13,16 +13,26 @@ const ProductListItem = ({
   showLeftPrice = false,
   showOrderDate = false,
   isPastOrder = false,
+  isCardClickable = false,
+  isImgClickable = true,
+  onClick = () => {},
+  onImgClick = () => {},
 }) => {
   return (
     <div
-      className={`ProductListItem ${
-        !!showBorder ? 'show-border' : ''
+      className={`ProductListItem ${!!showBorder ? 'show-border' : ''} ${
+        !!isCardClickable ? 'cursor-pointer' : ''
       } d-flex justify-content-between align-items-center`}
+      onClick={onClick}
     >
       <div className="ProductListItem-left d-flex">
         <div className="ProductListItem-left__productImg">
-          <img alt="Tshirt" className="cursor-pointer" src={productImg} />
+          <img
+            alt="Tshirt"
+            className={`${isImgClickable ? 'cursor-pointer' : ''}`}
+            src={productImg}
+            onClick={onImgClick}
+          />
         </div>
         <div className="ProductListItem-left__productInfo align-self-center">
           <div

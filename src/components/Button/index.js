@@ -7,7 +7,7 @@ import './Button.scss';
 const Button = ({
   className,
   iconName,
-  isBlack,
+  isBlack = true,
   isCenter = false,
   isFullWidth = false,
   label,

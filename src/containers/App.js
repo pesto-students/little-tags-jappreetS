@@ -9,6 +9,7 @@ import Cart from './Cart';
 import Home from './Home';
 import PastOrders from './PastOrders';
 import ProductsList from './ProductsList';
+import ProductDetail from './ProductDetail';
 import SignIn from './SignIn';
 import ThankYou from './ThankYou';
 import WishList from './WishList';
@@ -32,6 +33,9 @@ const App = () => {
           </Route>
           <Route path={`${ROUTES.PRODUCT_LIST}/:id`}>
             <ProductsList />
+          </Route>
+          <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`}>
+            <ProductDetail />
           </Route>
           <Route path={`${ROUTES.CART}`}>
             <Cart />
