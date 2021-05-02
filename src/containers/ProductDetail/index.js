@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from '../../components/Button';
 import Counter from '../../components/Counter';
+import ProductCard from '../../components/ProductCard';
 import ProductSlider from '../../components/ProductSlider';
 
 import img1 from './../../global/assets/images/product-1@2x.png';
@@ -44,48 +45,63 @@ const sizes = [
 
 const ProductDetail = () => {
   return (
-    <div className="ProductDetail d-flex ">
-      <ProductSlider slides={images} />
-      <div className="ProductDetail-details">
-        <div className="ProductDetail-details__title">Faux Leather Jacket</div>
-        <div className="ProductDetail-details__price">&#8377; 1200.00</div>
-        <div className="ProductDetail-details__description">
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut
-          </p>
+    <div className="ProductDetail">
+      <div className="d-flex">
+        <ProductSlider slides={images} />
+        <div className="ProductDetail-details">
+          <div className="ProductDetail-details__title">
+            Faux Leather Jacket
+          </div>
+          <div className="ProductDetail-details__price">&#8377; 1200.00</div>
+          <div className="ProductDetail-details__description">
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut
+            </p>
+          </div>
+          <div className="ProductDetail-details__sizes">
+            <div className="title">Size</div>
+            {sizes.map(({ id, label, disable }) => (
+              <span
+                key={id}
+                className={`size cursor-pointer ${!!disable ? 'disabled' : ''}`}
+              >
+                {label}
+              </span>
+            ))}
+          </div>
+          <div className="ProductDetail-details__quantity">
+            <div className="title">Quantity</div>
+            <Counter />
+          </div>
+          <Button
+            iconName="cart"
+            isBlack={false}
+            isLeftAlign
+            label="PROCEED"
+            varient="secondary"
+            onClick={() => {}}
+          />
         </div>
-        <div className="ProductDetail-details__sizes">
-          <div className="title">Size</div>
-          {sizes.map(({ id, label, disable }) => (
-            <span
-              key={id}
-              className={`size cursor-pointer ${!!disable ? 'disabled' : ''}`}
-            >
-              {label}
-            </span>
-          ))}
+      </div>
+      <div className="ProductDetail-popularProducts">
+        <div className="ProductDetail-popularProducts__title text-align-center">
+          More you'll like
         </div>
-        <div className="ProductDetail-details__quantity">
-          <div className="title">Quantity</div>
-          <Counter />
+        <div className="ProductDetail-popularProducts__products d-flex justify-content-between">
+          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
+          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
+          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
+          <ProductCard caption="T-shirt" name="product-1" variant="ternary" />
         </div>
-        <Button
-          iconName="cart"
-          isBlack={false}
-          isLeftAlign
-          label="PROCEED"
-          varient="secondary"
-          onClick={() => {}}
-        />
       </div>
     </div>
   );
