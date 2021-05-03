@@ -5,6 +5,7 @@ import * as ROUTES from './../constants/routes';
 
 import withAuthentication from './../hoc/withAuthentication';
 
+import AddAddress from './AddAddress';
 import Cart from './Cart';
 import Home from './Home';
 import PastOrders from './PastOrders';
@@ -41,7 +42,7 @@ const App = () => {
             <Cart />
           </Route>
           <Route path={ROUTES.ADD_ADDRESS}>
-            <Cart />
+            <AddAddress />
           </Route>
           <Route path={ROUTES.PAST_ORDERS}>
             <PastOrders />
