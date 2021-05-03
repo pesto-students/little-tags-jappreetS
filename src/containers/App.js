@@ -11,6 +11,7 @@ import Home from './Home';
 import PastOrders from './PastOrders';
 import ProductsList from './ProductsList';
 import ProductDetail from './ProductDetail';
+import SelectAddress from './SelectAddress';
 import SignIn from './SignIn';
 import ThankYou from './ThankYou';
 import WishList from './WishList';
@@ -37,6 +38,9 @@ const App = () => {
           </Route>
           <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`}>
             <ProductDetail />
+          </Route>
+          <Route path={`${ROUTES.SELECT_ADDRESS}`}>
+            <SelectAddress />
           </Route>
           <Route path={`${ROUTES.CART}`}>
             <Cart />
