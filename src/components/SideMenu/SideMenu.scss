@@ -56,8 +56,9 @@ $root: '.SideMenu';
           margin-bottom: 8px;
           a {
             font-size: 18px;
-            text-decoration: none;
             color: #000;
+            text-decoration: none;
+            text-transform: capitalize;
           }
           &:last-child {
             margin-bottom: 0;

@@ -1,3 +1,5 @@
+const API_BASE_URL = 'https://fakestoreapi.com';
+
 const GITHUB_PROFILE = 'https://github.com/jappreetS';
 const LINKEDIN_PROFILE = 'https://www.linkedin.com/in/jappreetsingh/';
 
@@ -33,4 +35,10 @@ const SIDE_MENU_OTHER_PAGES = [
   },
 ];
 
-export { GITHUB_PROFILE, LINKEDIN_PROFILE, CATEGORIES, SIDE_MENU_OTHER_PAGES };
+export {
+  API_BASE_URL,
+  GITHUB_PROFILE,
+  LINKEDIN_PROFILE,
+  CATEGORIES,
+  SIDE_MENU_OTHER_PAGES,
+};

@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-import { updateSideMenuState } from './../../actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 import FirebaseContext from './../../context/firebase';
-import { CATEGORIES, SIDE_MENU_OTHER_PAGES } from './../../constants';
+import { SIDE_MENU_OTHER_PAGES } from './../../constants';
 import { PRODUCT_LIST } from './../../constants/routes';
+
+import { updateSideMenuState } from './../../actions';
 
 import Button from './../Button';
 import Icon from './../../elements/Icon';
@@ -15,9 +14,14 @@ import Icon from './../../elements/Icon';
 import './SideMenu.scss';
 
 const SideMenu = (props) => {
-  const { userFirstName, isSideMenuOpen, updateSideMenuState } = props;
   const firebase = useContext(FirebaseContext);
+  const dispatch = useDispatch();
+  const isSideMenuOpen = useSelector(
+    (state) => state.sideMenuState.isSideMenuOpen
+  );
+  const allCategories = useSelector((state) => state.allCategories.categories);
   const [isOpen, setIsOpen] = useState(isSideMenuOpen);
+  const { userFirstName } = props;
 
   useEffect(() => {
     setIsOpen(isSideMenuOpen);
@@ -25,7 +29,7 @@ const SideMenu = (props) => {
 
   const handleCloseSideMenuClick = () => {
     setIsOpen(false);
-    updateSideMenuState(false);
+    dispatch(updateSideMenuState(false));
   };
 
   const handleSignOut = () => {
@@ -33,10 +37,13 @@ const SideMenu = (props) => {
     handleCloseSideMenuClick();
   };
 
-  const categories = CATEGORIES.map(({ id, label }) => (
-    <li key={id}>
-      <Link to={`${PRODUCT_LIST}/${id}`} onClick={handleCloseSideMenuClick}>
-        {label}
+  const categories = allCategories.map((category) => (
+    <li key={category}>
+      <Link
+        to={`${PRODUCT_LIST}/${category}`}
+        onClick={handleCloseSideMenuClick}
+      >
+        {category}
       </Link>
     </li>
   ));
@@ -95,12 +102,4 @@ const SideMenu = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isSideMenuOpen: state.sideMenuState.isSideMenuOpen,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateSideMenuState }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);
+export default SideMenu;

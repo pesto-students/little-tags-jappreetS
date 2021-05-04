@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import * as ROUTES from './../constants/routes';
+
+import { getAllCategoriesAction } from '../actions';
 
 import withAuthentication from './../hoc/withAuthentication';
 
@@ -23,6 +26,14 @@ import Header from './../components/Header';
 import './../global/styles/common.scss';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCategoriesAction());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       <Header />
