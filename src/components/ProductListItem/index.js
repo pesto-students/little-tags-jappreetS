@@ -8,6 +8,7 @@ import productImg from './../../global/assets/images/hero@2x.png';
 import './ProductListItem.scss';
 
 const ProductListItem = ({
+  data,
   showBorder = true,
   showCounter = false,
   showLeftPrice = false,
@@ -19,8 +20,11 @@ const ProductListItem = ({
   onImgClick = () => {},
   onOrderAgainClick = () => {},
 }) => {
+  const { id, image, price, title } = data;
+
   return (
     <div
+      id={id}
       className={`ProductListItem ${!!showBorder ? 'show-border' : ''} ${
         !!isCardClickable ? 'cursor-pointer' : ''
       } d-flex justify-content-between align-items-center`}
@@ -31,7 +35,7 @@ const ProductListItem = ({
           <img
             alt="Tshirt"
             className={`${isImgClickable ? 'cursor-pointer' : ''}`}
-            src={productImg}
+            src={image}
             onClick={onImgClick}
           />
         </div>
@@ -41,10 +45,10 @@ const ProductListItem = ({
               !!showCounter || !!showLeftPrice ? 'add-margin' : ''
             }`}
           >
-            Faux Leather Jacket
+            {title}
           </div>
           {!!showCounter && <Counter />}
-          {!!showLeftPrice && <div className="price">&#8377; 1200.00</div>}
+          {!!showLeftPrice && <div className="price">&#8377; {price}</div>}
           {!!showOrderDate && (
             <div className="order-date">2 September 2020</div>
           )}
@@ -53,7 +57,7 @@ const ProductListItem = ({
       <div className="ProductListItem-right">
         {!showLeftPrice && (
           <div className="ProductListItem-right__productPrice">
-            &#8377; 1200.00
+            &#8377; {price}
           </div>
         )}
         {!!isPastOrder && (

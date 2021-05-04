@@ -2,9 +2,50 @@ import REQUEST from '../utils/http.service';
 import {
   ERROR_OCCURRED,
   GET_ALL_CATEGORIES,
+  GET_PRODUCTS_LIST,
   SET_AUTH_USER,
   UPDATE_SIDE_MENU_STATE,
 } from './../constants/actionTypes';
+
+const getAllCategoriesAction = () => {
+  return async (dispatch) => {
+    const res = await REQUEST({
+      method: 'GET',
+      url: '/products/categories',
+    });
+    if (!!res.status) {
+      dispatch({
+        type: GET_ALL_CATEGORIES,
+        payload: res.data,
+      });
+    } else {
+      dispatch({
+        type: ERROR_OCCURRED,
+        payload: res.data,
+      });
+    }
+  };
+};
+
+const getProductsByCategoryIdAction = (id) => {
+  return async (dispatch) => {
+    const res = await REQUEST({
+      method: 'GET',
+      url: `/products/category/${id}`,
+    });
+    if (!!res.status) {
+      dispatch({
+        type: GET_PRODUCTS_LIST,
+        payload: res.data,
+      });
+    } else {
+      dispatch({
+        type: ERROR_OCCURRED,
+        payload: res.data,
+      });
+    }
+  };
+};
 
 const setAuthUser = (authUser) => {
   return {
@@ -20,25 +61,9 @@ const updateSideMenuState = (state) => {
   };
 };
 
-const getAllCategoriesAction = () => {
-  return (dispatch) => {
-    return REQUEST({
-      method: 'GET',
-      url: '/products/categories',
-    }).then((res) => {
-      if (!!res.status) {
-        dispatch({
-          type: GET_ALL_CATEGORIES,
-          payload: res.data,
-        });
-      } else {
-        dispatch({
-          type: ERROR_OCCURRED,
-          payload: res.data,
-        });
-      }
-    });
-  };
+export {
+  getAllCategoriesAction,
+  getProductsByCategoryIdAction,
+  setAuthUser,
+  updateSideMenuState,
 };
-
-export { setAuthUser, updateSideMenuState, getAllCategoriesAction };
