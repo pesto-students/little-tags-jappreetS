@@ -96,7 +96,7 @@ const SideMenu = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  isSideMenuOpen: state.sideMenuSate.isSideMenuOpen,
+  isSideMenuOpen: state.sideMenuState.isSideMenuOpen,
 });
 
 const mapDispatchToProps = (dispatch) => {

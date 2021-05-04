@@ -4,7 +4,7 @@ import sideMenuStateReducer from './sideMenuStateReducer';
 
 const rootReducer = combineReducers({
   sessionState: sessionReducer,
-  sideMenuSate: sideMenuStateReducer,
+  sideMenuState: sideMenuStateReducer,
 });
 
 export default rootReducer;

@@ -86,7 +86,7 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => ({
   authUser: state.sessionState.authUser,
-  isSideMenuOpen: state.sideMenuSate.isSideMenuOpen,
+  isSideMenuOpen: state.sideMenuState.isSideMenuOpen,
 });
 
 const mapDispatchToProps = (dispatch) => {
