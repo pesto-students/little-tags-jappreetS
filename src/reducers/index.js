@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import sessionReducer from './sessionReducer';
-import sideMenuSateReducer from './sideMenuSateReducer';
+import sideMenuStateReducer from './sideMenuStateReducer';
 
 const rootReducer = combineReducers({
   sessionState: sessionReducer,
-  sideMenuSate: sideMenuSateReducer,
+  sideMenuSate: sideMenuStateReducer,
 });
 
 export default rootReducer;

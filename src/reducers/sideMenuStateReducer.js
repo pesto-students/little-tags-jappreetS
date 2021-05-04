@@ -4,7 +4,7 @@ const initialState = {
   isSideMenuOpen: false,
 };
 
-const sideMenuSateReducer = (state = initialState, action) => {
+const sideMenuStateReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS_TYPES.UPDATE_SIDE_MENU_STATE:
       return {
@@ -16,4 +16,4 @@ const sideMenuSateReducer = (state = initialState, action) => {
   }
 };
 
-export default sideMenuSateReducer;
+export default sideMenuStateReducer;
