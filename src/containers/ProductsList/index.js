@@ -25,10 +25,6 @@ const ProductsList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
-  const handleProductClick = () => {
-    history.push(`${PRODUCT_DETAIL}/productId`);
-  };
-
   return (
     <div className="ProductsList">
       <h1 className="ProductsList-title text-align-center">Products List</h1>
@@ -40,7 +36,7 @@ const ProductsList = () => {
             data={product}
             isCardClickable
             isImgClickable={false}
-            onClick={handleProductClick}
+            onClick={() => history.push(`${PRODUCT_DETAIL}/${product.id}`)}
           />
         ))}
       <Pagination currentPage={2} pageCount={6} />

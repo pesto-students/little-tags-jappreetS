@@ -12,7 +12,7 @@ const Dot = ({ active }) => (
 const Dots = ({ slides, activeIndex }) => (
   <div className="Dots">
     {slides.map((slide, i) => (
-      <Dot key={slide} active={activeIndex === i} />
+      <Dot key={i} active={activeIndex === i} />
     ))}
   </div>
 );

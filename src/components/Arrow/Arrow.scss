@@ -9,6 +9,7 @@ $root: '.Arrow';
   background-color: #000;
   cursor: pointer;
   transition: transform ease-in 0.1s;
+  box-shadow: 0 0 5px #fff;
   &:hover {
     transform: scale(1.1);
   }

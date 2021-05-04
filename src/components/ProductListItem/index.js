@@ -3,8 +3,6 @@ import React from 'react';
 import Button from './../Button';
 import Counter from './../Counter';
 
-import productImg from './../../global/assets/images/hero@2x.png';
-
 import './ProductListItem.scss';
 
 const ProductListItem = ({

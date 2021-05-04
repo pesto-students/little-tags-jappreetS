@@ -2,6 +2,7 @@ import REQUEST from '../utils/http.service';
 import {
   ERROR_OCCURRED,
   GET_ALL_CATEGORIES,
+  GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST,
   SET_AUTH_USER,
   UPDATE_SIDE_MENU_STATE,
@@ -47,6 +48,26 @@ const getProductsByCategoryIdAction = (id) => {
   };
 };
 
+const getProductDetailByIdAction = (id) => {
+  return async (dispatch) => {
+    const res = await REQUEST({
+      method: 'GET',
+      url: `/products/${id}`,
+    });
+    if (!!res.status) {
+      dispatch({
+        type: GET_PRODUCT_DETAIL,
+        payload: res.data,
+      });
+    } else {
+      dispatch({
+        type: ERROR_OCCURRED,
+        payload: res.data,
+      });
+    }
+  };
+};
+
 const setAuthUser = (authUser) => {
   return {
     type: SET_AUTH_USER,
@@ -64,6 +85,7 @@ const updateSideMenuState = (state) => {
 export {
   getAllCategoriesAction,
   getProductsByCategoryIdAction,
+  getProductDetailByIdAction,
   setAuthUser,
   updateSideMenuState,
 };

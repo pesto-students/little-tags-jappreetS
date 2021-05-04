@@ -1,19 +1,19 @@
 import * as ACTIONS_TYPES from '../constants/actionTypes';
 
 const initialState = {
-  products: null,
+  product: null,
 };
 
-const productsListReducer = (state = initialState, action) => {
+const productDetailReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTIONS_TYPES.GET_PRODUCTS_LIST:
+    case ACTIONS_TYPES.GET_PRODUCT_DETAIL:
       return {
         ...state,
-        products: action.payload,
+        product: action.payload,
       };
     default:
       return state;
   }
 };
 
-export default productsListReducer;
+export default productDetailReducer;
