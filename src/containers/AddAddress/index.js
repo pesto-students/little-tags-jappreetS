@@ -1,4 +1,7 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { SELECT_ADDRESS } from '../../constants/routes';
 
 import Button from './../../components/Button';
 import Input from '../../elements/Input';
@@ -7,6 +10,8 @@ import Select from '../../elements/Select';
 import './AddAddress.scss';
 
 const AddAddress = () => {
+  const history = useHistory();
+
   return (
     <div className="AddAddress">
       <h1 className="AddAddress-title text-align-center">Add Address</h1>
@@ -28,7 +33,7 @@ const AddAddress = () => {
         isCenter
         label="ADD INFORMATIONS"
         varient="secondary"
-        onClick={() => {}}
+        onClick={() => history.push(SELECT_ADDRESS)}
       />
     </div>
   );

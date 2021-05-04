@@ -17,6 +17,7 @@ const ProductListItem = ({
   isImgClickable = true,
   onClick = () => {},
   onImgClick = () => {},
+  onOrderAgainClick = () => {},
 }) => {
   return (
     <div
@@ -56,7 +57,11 @@ const ProductListItem = ({
           </div>
         )}
         {!!isPastOrder && (
-          <Button label="ORDER AGAIN" varient="secondary" onClick={() => {}} />
+          <Button
+            label="ORDER AGAIN"
+            varient="secondary"
+            onClick={onOrderAgainClick}
+          />
         )}
       </div>
     </div>

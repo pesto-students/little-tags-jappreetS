@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { SELECT_ADDRESS } from '../../constants/routes';
+import { PRODUCT_DETAIL, SELECT_ADDRESS } from '../../constants/routes';
 
 import Button from './../../components/Button';
 import ProductListItem from './../../components/ProductListItem';
@@ -15,8 +15,16 @@ const Cart = () => {
     <div className="Cart">
       <h1 className="Cart-title text-align-center">My Cart</h1>
       <div className="Cart-itemsList">
-        <ProductListItem showBorder={false} showCounter />
-        <ProductListItem showBorder={false} showCounter />
+        <ProductListItem
+          showBorder={false}
+          showCounter
+          onImgClick={() => history.push(`${PRODUCT_DETAIL}/productId`)}
+        />
+        <ProductListItem
+          showBorder={false}
+          showCounter
+          onImgClick={() => history.push(`${PRODUCT_DETAIL}/productId`)}
+        />
       </div>
       <Button
         isCenter

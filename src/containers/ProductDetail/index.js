@@ -1,4 +1,7 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { CART } from '../../constants/routes';
 
 import Button from '../../components/Button';
 import Counter from '../../components/Counter';
@@ -44,6 +47,8 @@ const sizes = [
 ];
 
 const ProductDetail = () => {
+  const history = useHistory();
+
   return (
     <div className="ProductDetail">
       <div className="d-flex">
@@ -88,7 +93,7 @@ const ProductDetail = () => {
             isLeftAlign
             label="PROCEED"
             varient="secondary"
-            onClick={() => {}}
+            onClick={() => history.push(CART)}
           />
         </div>
       </div>

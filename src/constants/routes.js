@@ -6,6 +6,7 @@ const PRODUCT_DETAIL = '/product-detail';
 const CART = '/cart';
 const SELECT_ADDRESS = '/select-address';
 const ADD_ADDRESS = '/add-address';
+const SELECT_PAYMENT_METHOD = '/select-payment-method';
 const PAST_ORDERS = '/past-orders';
 const THANK_YOU = '/thank-you';
 
@@ -18,6 +19,7 @@ export {
   CART,
   SELECT_ADDRESS,
   ADD_ADDRESS,
+  SELECT_PAYMENT_METHOD,
   PAST_ORDERS,
   THANK_YOU,
 };

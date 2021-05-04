@@ -15,10 +15,15 @@ $root: '.RadioButton';
 }
 
 #{$root} {
-  width: 400px;
-  background-color: #f4f4f4;
-  border-radius: 20px;
-  padding: 24px;
+  &.primary {
+    margin-bottom: 16px;
+  }
+  &.secondary {
+    width: 400px;
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    padding: 24px;
+  }
 
   input[type='radio'] {
     display: none;
@@ -33,8 +38,16 @@ $root: '.RadioButton';
     }
   }
 
+  &-inputContainer {
+    &.primary {
+      label {
+        padding-left: 32px;
+        height: 24px;
+      }
+    }
+  }
+
   label {
-    display: inline-block;
     height: 20px;
     position: relative;
     padding: 0 25px;
@@ -78,6 +91,8 @@ $root: '.RadioButton';
     &__phone {
       font-size: 16px;
       width: 60%;
+    }
+    &__address {
       margin-bottom: 8px;
     }
   }

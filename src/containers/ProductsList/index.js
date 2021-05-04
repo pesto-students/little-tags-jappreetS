@@ -1,11 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { PRODUCT_DETAIL } from '../../constants/routes';
+
 import ProductListItem from './../../components/ProductListItem';
 import Pagination from './../../components/Pagination';
 
 import './ProductsList.scss';
-import { PRODUCT_DETAIL } from '../../constants/routes';
 
 const ProductsList = () => {
   const history = useHistory();

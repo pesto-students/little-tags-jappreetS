@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-import { ADD_ADDRESS, THANK_YOU } from '../../constants/routes';
+import { ADD_ADDRESS, SELECT_PAYMENT_METHOD } from '../../constants/routes';
 
 import Button from '../../components/Button';
+import RadioButton from '../../components/RadioButton';
 import Icon from '../../elements/Icon';
-import RadioButton from '../../elements/RadioButton';
 
 import './SelectAddress.scss';
 
@@ -26,6 +26,7 @@ const SelectAddress = () => {
           isSelected={selectedAddress === '1'}
           label=""
           value="1"
+          variant="secondary"
           onChange={handleChange}
         />
         <RadioButton
@@ -33,6 +34,7 @@ const SelectAddress = () => {
           isSelected={selectedAddress === '2'}
           label=""
           value="2"
+          variant="secondary"
           onChange={handleChange}
         />
       </div>
@@ -54,7 +56,7 @@ const SelectAddress = () => {
         isCenter
         label="PROCEED"
         varient="secondary"
-        onClick={() => history.push(THANK_YOU)}
+        onClick={() => history.push(SELECT_PAYMENT_METHOD)}
       />
     </div>
   );

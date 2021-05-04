@@ -9,6 +9,7 @@ import AddAddress from './AddAddress';
 import Cart from './Cart';
 import Home from './Home';
 import PastOrders from './PastOrders';
+import PaymentMethod from './PaymentMethod';
 import ProductsList from './ProductsList';
 import ProductDetail from './ProductDetail';
 import SelectAddress from './SelectAddress';
@@ -39,14 +40,17 @@ const App = () => {
           <Route path={`${ROUTES.PRODUCT_DETAIL}/:id`}>
             <ProductDetail />
           </Route>
-          <Route path={`${ROUTES.SELECT_ADDRESS}`}>
-            <SelectAddress />
-          </Route>
           <Route path={`${ROUTES.CART}`}>
             <Cart />
           </Route>
+          <Route path={`${ROUTES.SELECT_ADDRESS}`}>
+            <SelectAddress />
+          </Route>
           <Route path={ROUTES.ADD_ADDRESS}>
             <AddAddress />
+          </Route>
+          <Route path={ROUTES.SELECT_PAYMENT_METHOD}>
+            <PaymentMethod />
           </Route>
           <Route path={ROUTES.PAST_ORDERS}>
             <PastOrders />
