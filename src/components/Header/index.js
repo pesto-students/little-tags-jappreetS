@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CART, HOME, SIGN_IN } from './../../constants/routes';
 
@@ -15,8 +14,13 @@ import Icon from './../../elements/Icon';
 import './Header.scss';
 
 const Header = (props) => {
-  const { authUser, isHome, isSideMenuOpen, updateSideMenuState } = props;
+  const dispatch = useDispatch();
   const history = useHistory();
+  const cart = useSelector((state) => state.cartState.cart);
+  const authUser = useSelector((state) => state.sessionState.authUser);
+  const isSideMenuOpen = useSelector(
+    (state) => state.sideMenuState.isSideMenuOpen
+  );
   const [firstName, setFirstName] = useState('');
 
   useEffect(() => {
@@ -29,18 +33,14 @@ const Header = (props) => {
   }, [authUser]);
 
   return (
-    <div
-      className={`Header d-flex align-items-center justify-content-between color-${
-        !!isHome ? 'white' : 'black'
-      }`}
-    >
+    <div className="Header d-flex align-items-center justify-content-between">
       <div className="Header-left d-flex align-items-center">
         <Icon
           className="mr-16"
           name="hamburger"
           width={32}
           height={32}
-          onClick={() => updateSideMenuState(true)}
+          onClick={() => dispatch(updateSideMenuState(true))}
         />
         <div
           role="button"
@@ -70,13 +70,18 @@ const Header = (props) => {
             path={SIGN_IN}
           />
         )}
-        <Icon
-          className="ml-16"
-          name="cart"
-          width={32}
-          height={32}
-          onClick={() => history.push(CART)}
-        />
+        <div className="Header-right__cartIcon">
+          <Icon
+            className="ml-16"
+            name="cart"
+            width={32}
+            height={32}
+            onClick={() => history.push(CART)}
+          />
+          <div className="count d-flex justify-content-center align-items-center">
+            {cart.length}
+          </div>
+        </div>
       </div>
       <SideMenu userFirstName={!!firstName ? firstName : ''} />
       {!!isSideMenuOpen && <div className="overlay-dark" />}
@@ -84,13 +89,4 @@ const Header = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  authUser: state.sessionState.authUser,
-  isSideMenuOpen: state.sideMenuState.isSideMenuOpen,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateSideMenuState }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

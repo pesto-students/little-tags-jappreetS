@@ -6,9 +6,11 @@ import productDetailReducer from './productDetailReducer';
 import productsListReducer from './productsListReducer';
 import sessionReducer from './sessionReducer';
 import sideMenuStateReducer from './sideMenuStateReducer';
+import updateCartReducer from './updateCartReducer';
 
 const rootReducer = combineReducers({
   allCategories: allCategoriesReducer,
+  cartState: updateCartReducer,
   errorMessages: errorMessagesReducer,
   productDetail: productDetailReducer,
   productsList: productsListReducer,

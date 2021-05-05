@@ -1,30 +1,34 @@
 import React, { useEffect, useContext } from 'react';
-import { connect } from 'react-redux';
-import { setAuthUser } from './../actions';
+import { useDispatch } from 'react-redux';
+
+import { setAuthUser, updateCartAction } from './../actions';
 
 import FirebaseContext from './../context/firebase';
 
 const withAuthentication = (Component) => {
   const UpdatedComponent = (props) => {
     const firebase = useContext(FirebaseContext);
+    const dispatch = useDispatch();
 
     const saveToLocalStorage = (authUser) => {
       localStorage.setItem('authUser', JSON.stringify(authUser));
     };
 
     const next = (authUser) => {
-      saveToLocalStorage(authUser);
-      props.setAuthUser(authUser);
+      const { cart, ...rest } = authUser;
+      saveToLocalStorage(rest);
+      dispatch(setAuthUser(rest));
+      dispatch(updateCartAction(cart));
     };
 
     const fallback = () => {
       localStorage.removeItem('authUser');
-      props.setAuthUser(null);
+      dispatch(setAuthUser(null));
     };
 
     useEffect(() => {
       const user = localStorage.getItem('authUser');
-      props.setAuthUser(user);
+      dispatch(setAuthUser(user));
       firebase.onAuthChangeListener(next, fallback);
 
       // eslint-disable-next-line
@@ -33,7 +37,7 @@ const withAuthentication = (Component) => {
     return <Component {...props} />;
   };
 
-  return connect(null, { setAuthUser })(UpdatedComponent);
+  return UpdatedComponent;
 };
 
 export default withAuthentication;

@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import trashIcon from './../../global/assets/icons/trash.svg';
 
 import './Counter.scss';
 
-const Counter = ({ defaultCount = 0 }) => {
-  let [count, setCount] = useState(defaultCount);
+const Counter = ({ count = 0, onCountChange }) => {
+  const [countValue, setCountValue] = useState(count);
+  const initialRender = useRef(true);
 
   const handleCount = (mode) => {
     if (mode === 'increment') {
-      setCount((c) => c + 1);
+      setCountValue((c) => c + 1);
     } else {
-      count >= 1 && setCount((c) => c - 1);
+      countValue >= 1 && setCountValue((c) => c - 1);
     }
   };
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      onCountChange(countValue);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countValue]);
 
   return (
     <div className="Counter d-flex align-items-center">
       <button
         type="button"
-        className="Counter-btn"
+        className="Counter-btn d-flex align-items-center"
         onClick={() => handleCount('decrement')}
       >
-        -
+        {countValue === 1 ? <img alt="delete" src={trashIcon} /> : '-'}
       </button>
-      <div className="Counter-count align-self-center">{count}</div>
+      <div className="Counter-count align-self-center">{countValue}</div>
       <button
         type="button"
         className="Counter-btn"

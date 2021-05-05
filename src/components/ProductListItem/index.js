@@ -1,4 +1,10 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import FirebaseContext from '../../context/firebase';
+
+import { getUserDetails } from '../../utils/helpers';
+import { updateCartAction } from '../../actions';
 
 import Button from './../Button';
 import Counter from './../Counter';
@@ -18,7 +24,24 @@ const ProductListItem = ({
   onImgClick = () => {},
   onOrderAgainClick = () => {},
 }) => {
-  const { id, image, price, title } = data;
+  const firebase = useContext(FirebaseContext);
+  const dispatch = useDispatch();
+  const { count, id, image, price, title } = !!data && data;
+  const [productCount, setProductCount] = useState(count);
+  const authUser = useSelector((state) => state.sessionState.authUser);
+
+  const handleCartUpdate = (count) => {
+    setProductCount(count);
+    const cartData = { id, image, price, title, count };
+    const cartArr = [];
+
+    cartArr.push(cartData);
+    firebase.user(authUser.uid).set({
+      cart: cartArr,
+      ...getUserDetails(authUser),
+    });
+    dispatch(updateCartAction(cartArr));
+  };
 
   return (
     <div
@@ -45,7 +68,9 @@ const ProductListItem = ({
           >
             {title}
           </div>
-          {!!showCounter && <Counter />}
+          {!!showCounter && (
+            <Counter count={productCount} onCountChange={handleCartUpdate} />
+          )}
           {!!showLeftPrice && <div className="price">&#8377; {price}</div>}
           {!!showOrderDate && (
             <div className="order-date">2 September 2020</div>
@@ -55,7 +80,7 @@ const ProductListItem = ({
       <div className="ProductListItem-right">
         {!showLeftPrice && (
           <div className="ProductListItem-right__productPrice">
-            &#8377; {price}
+            &#8377; {price * productCount}
           </div>
         )}
         {!!isPastOrder && (

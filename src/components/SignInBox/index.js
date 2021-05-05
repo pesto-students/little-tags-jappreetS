@@ -19,7 +19,7 @@ const SignInBox = () => {
       .then((authUser) => {
         firebase.user(authUser.user.uid).set({
           email: authUser.user.email,
-          username: getUserName(authUser.additionalUserInfo.profile),
+          username: authUser.additionalUserInfo.profile.given_name,
           displayName: authUser.user.displayName,
         });
         setIsLogin(true);
@@ -27,10 +27,6 @@ const SignInBox = () => {
       .catch((error) => {
         setErrorMessage(error.message);
       });
-  };
-
-  const getUserName = (profileData) => {
-    return `${profileData.given_name}_${profileData.family_name}`.toLowerCase();
   };
 
   return (

@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CART } from '../../constants/routes';
+import FirebaseContext from '../../context/firebase';
 
-import { getProductDetailByIdAction } from '../../actions';
+import { getUserDetails } from '../../utils/helpers';
+import { getProductDetailByIdAction, updateCartAction } from '../../actions';
 
 import Button from '../../components/Button';
 import Counter from '../../components/Counter';
@@ -42,13 +44,15 @@ const sizes = [
 ];
 
 const ProductDetail = () => {
-  const history = useHistory();
-
+  const firebase = useContext(FirebaseContext);
   const dispatch = useDispatch();
+  const history = useHistory();
   const location = useLocation();
   const product = useSelector((state) => state.productDetail.product);
+  const authUser = useSelector((state) => state.sessionState.authUser);
+  const [count, setCount] = useState(0);
 
-  const { description, image, price, title } = !!product && product;
+  const { description, id, image, price, title } = !!product && product;
 
   const images = Array(5).fill(image);
 
@@ -60,10 +64,27 @@ const ProductDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
+  const handleCartUpdate = (count) => {
+    setCount(count);
+    const cartData = { id, image, price, title, count };
+    const cartArr = [];
+
+    cartArr.push(cartData);
+    firebase.user(authUser.uid).set({
+      cart: cartArr,
+      ...getUserDetails(authUser),
+    });
+    dispatch(updateCartAction(cartArr));
+  };
+
+  const handleSubmit = () => {
+    history.push(CART);
+  };
+
   return (
     <>
       {!!product ? (
-        <div className="ProductDetail">
+        <div id={`product-${id}`} className="ProductDetail">
           <div className="d-flex">
             <ProductSlider slides={images} />
             <div className="ProductDetail-details">
@@ -89,15 +110,15 @@ const ProductDetail = () => {
               </div>
               <div className="ProductDetail-details__quantity">
                 <div className="title">Quantity</div>
-                <Counter />
+                <Counter count={count} onCountChange={handleCartUpdate} />
               </div>
               <Button
-                iconName="cart"
+                iconName={count > 0 ? 'cart' : ''}
                 isBlack={false}
                 isLeftAlign
                 label="PROCEED"
                 varient="secondary"
-                onClick={() => history.push(CART)}
+                onClick={handleSubmit}
               />
             </div>
           </div>
