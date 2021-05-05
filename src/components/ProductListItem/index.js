@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 
+import { CART } from '../../constants/routes';
 import FirebaseContext from '../../context/firebase';
 
 import { getUserDetails } from '../../utils/helpers';
@@ -26,9 +28,11 @@ const ProductListItem = ({
 }) => {
   const firebase = useContext(FirebaseContext);
   const dispatch = useDispatch();
+  const location = useLocation();
   const { count, id, image, price, title } = !!data && data;
   const [productCount, setProductCount] = useState(count);
   const authUser = useSelector((state) => state.sessionState.authUser);
+  const isCart = location.pathname.includes(CART);
 
   const handleCartUpdate = (count) => {
     setProductCount(count);
@@ -80,7 +84,7 @@ const ProductListItem = ({
       <div className="ProductListItem-right">
         {!showLeftPrice && (
           <div className="ProductListItem-right__productPrice">
-            &#8377; {price * productCount}
+            &#8377; {isCart ? price * productCount : price}
           </div>
         )}
         {!!isPastOrder && (

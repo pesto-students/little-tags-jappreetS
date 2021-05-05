@@ -78,9 +78,11 @@ const Header = (props) => {
             height={32}
             onClick={() => history.push(CART)}
           />
-          <div className="count d-flex justify-content-center align-items-center">
-            {cart.length}
-          </div>
+          {!!cart && cart.length > 0 && (
+            <div className="count d-flex justify-content-center align-items-center">
+              {cart.length}
+            </div>
+          )}
         </div>
       </div>
       <SideMenu userFirstName={!!firstName ? firstName : ''} />
