@@ -39,9 +39,9 @@ const ProductListItem = ({
     const cartData = { id, image, price, title, count };
     const cartArr = [];
 
-    cartArr.push(cartData);
+    count > 0 && cartArr.push(cartData);
     firebase.user(authUser.uid).set({
-      cart: cartArr,
+      ...(count > 0 && { cart: cartArr }),
       ...getUserDetails(authUser),
     });
     dispatch(updateCartAction(cartArr));
@@ -73,7 +73,11 @@ const ProductListItem = ({
             {title}
           </div>
           {!!showCounter && (
-            <Counter count={productCount} onCountChange={handleCartUpdate} />
+            <Counter
+              count={productCount}
+              isCart={isCart}
+              onCountChange={handleCartUpdate}
+            />
           )}
           {!!showLeftPrice && <div className="price">&#8377; {price}</div>}
           {!!showOrderDate && (

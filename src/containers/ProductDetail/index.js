@@ -50,6 +50,7 @@ const ProductDetail = () => {
   const location = useLocation();
   const product = useSelector((state) => state.productDetail.product);
   const authUser = useSelector((state) => state.sessionState.authUser);
+  const cart = useSelector((state) => state.cartState.cart);
   const [count, setCount] = useState(0);
 
   const { description, id, image, price, title } = !!product && product;
@@ -57,21 +58,29 @@ const ProductDetail = () => {
   const images = Array(5).fill(image);
 
   useEffect(() => {
+    const currentProduct =
+      !!cart && cart.find((item) => item.id === product.id);
+    !!currentProduct && setCount(currentProduct.count);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]);
+
+  useEffect(() => {
     const pathnameArr = location.pathname.split('/');
     const productId = pathnameArr.slice(-1)[0];
     dispatch(getProductDetailByIdAction(productId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, [count]);
 
   const handleCartUpdate = (count) => {
     setCount(count);
     const cartData = { id, image, price, title, count };
     const cartArr = [];
 
-    cartArr.push(cartData);
+    count > 0 && cartArr.push(cartData);
     firebase.user(authUser.uid).set({
-      cart: cartArr,
+      ...(count > 0 && { cart: cartArr }),
       ...getUserDetails(authUser),
     });
     dispatch(updateCartAction(cartArr));

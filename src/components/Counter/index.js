@@ -4,7 +4,7 @@ import trashIcon from './../../global/assets/icons/trash.svg';
 
 import './Counter.scss';
 
-const Counter = ({ count = 0, onCountChange }) => {
+const Counter = ({ count = 0, isCart = false, onCountChange }) => {
   const [countValue, setCountValue] = useState(count);
   const initialRender = useRef(true);
 
@@ -33,7 +33,11 @@ const Counter = ({ count = 0, onCountChange }) => {
         className="Counter-btn d-flex align-items-center"
         onClick={() => handleCount('decrement')}
       >
-        {countValue === 1 ? <img alt="delete" src={trashIcon} /> : '-'}
+        {countValue === 1 && isCart ? (
+          <img alt="delete" src={trashIcon} />
+        ) : (
+          '-'
+        )}
       </button>
       <div className="Counter-count align-self-center">{countValue}</div>
       <button
