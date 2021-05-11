@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { ADD_ADDRESS, SELECT_PAYMENT_METHOD } from '../../constants/routes';
+import { updateSelectedAddress } from '../../actions';
 
 import Button from '../../components/Button';
 import RadioButton from '../../components/RadioButton';
@@ -10,33 +12,44 @@ import Icon from '../../elements/Icon';
 import './SelectAddress.scss';
 
 const SelectAddress = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [selectedAddress, setSelectedAddress] = useState('1');
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
+  const addressList = useSelector((state) => state.addressList.addresses);
+  const [selectedAddress, setSelectedAddress] = useState(
+    addressList[selectedAddressIndex]
+  );
+
+  useEffect(() => {
+    setSelectedAddress(addressList[selectedAddressIndex]);
+  }, [addressList, selectedAddressIndex]);
 
   const handleChange = (event) => {
-    setSelectedAddress(event.target.value);
+    const selectedAddressIndexValue = Number(event.target.value);
+    setSelectedAddressIndex(selectedAddressIndexValue);
+  };
+
+  const handleProceed = () => {
+    dispatch(updateSelectedAddress(selectedAddress));
+    history.push(SELECT_PAYMENT_METHOD);
   };
 
   return (
     <div className="SelectAddress">
       <h1 className="SelectAddress-title text-align-center">Deliver To</h1>
       <div className="SelectAddress-addressList d-flex flex-direction-col align-items-center">
-        <RadioButton
-          id="1"
-          isSelected={selectedAddress === '1'}
-          label=""
-          value="1"
-          variant="secondary"
-          onChange={handleChange}
-        />
-        <RadioButton
-          id="2"
-          isSelected={selectedAddress === '2'}
-          label=""
-          value="2"
-          variant="secondary"
-          onChange={handleChange}
-        />
+        {addressList.map((address, index) => (
+          <RadioButton
+            key={index}
+            id={index}
+            isSelected={selectedAddressIndex === index}
+            label=""
+            data={address}
+            value={index}
+            variant="secondary"
+            onChange={handleChange}
+          />
+        ))}
       </div>
       <div
         role="button"
@@ -56,7 +69,8 @@ const SelectAddress = () => {
         isCenter
         label="PROCEED"
         varient="secondary"
-        onClick={() => history.push(SELECT_PAYMENT_METHOD)}
+        // onClick={() => history.push(SELECT_PAYMENT_METHOD)}
+        onClick={handleProceed}
       />
     </div>
   );

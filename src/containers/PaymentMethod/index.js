@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { THANK_YOU } from '../../constants/routes';
@@ -10,6 +11,7 @@ import './PaymentMethod.scss';
 
 const PaymentMethod = () => {
   const history = useHistory();
+  const selectedAddress = useSelector((state) => state.selectedAddress.address);
   const [selectedPaymentMode, setSelectedPaymentMode] = useState('1');
 
   const handleChange = (event) => {
@@ -21,9 +23,7 @@ const PaymentMethod = () => {
       <h1 className="PaymentMethod-title text-align-center">Delivering To</h1>
       <div className="PaymentMethod-selectedAddress d-flex flex-direction-col align-items-center">
         <RadioButton
-          id="1"
-          label=""
-          value="1"
+          data={selectedAddress}
           showRadioButton={false}
           variant="secondary"
           onChange={handleChange}

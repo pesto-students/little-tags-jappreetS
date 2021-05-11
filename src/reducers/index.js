@@ -8,6 +8,7 @@ import sessionReducer from './sessionReducer';
 import sideMenuStateReducer from './sideMenuStateReducer';
 import updateAddressListReducer from './updateAddressListReducer';
 import updateCartReducer from './updateCartReducer';
+import updatedSelectedAddressReducer from './updatedSelectedAddressReducer';
 
 const rootReducer = combineReducers({
   addressList: updateAddressListReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   errorMessages: errorMessagesReducer,
   productDetail: productDetailReducer,
   productsList: productsListReducer,
+  selectedAddress: updatedSelectedAddressReducer,
   sessionState: sessionReducer,
   sideMenuState: sideMenuStateReducer,
 });

@@ -5,9 +5,10 @@ import {
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST,
   SET_AUTH_USER,
-  UPDATE_CART,
-  UPDATE_SIDE_MENU_STATE,
   UPDATE_ADDRESS_LIST,
+  UPDATE_CART,
+  UPDATE_SELECTED_ADDRESS,
+  UPDATE_SIDE_MENU_STATE,
 } from './../constants/actionTypes';
 
 const getAllCategoriesAction = () => {
@@ -70,13 +71,6 @@ const getProductDetailByIdAction = (id) => {
   };
 };
 
-const updateAddressList = (data) => {
-  return {
-    type: UPDATE_ADDRESS_LIST,
-    payload: data,
-  };
-};
-
 const setAuthUser = (authUser) => {
   return {
     type: SET_AUTH_USER,
@@ -84,9 +78,23 @@ const setAuthUser = (authUser) => {
   };
 };
 
+const updateAddressList = (data) => {
+  return {
+    type: UPDATE_ADDRESS_LIST,
+    payload: data,
+  };
+};
+
 const updateCartAction = (data) => {
   return {
     type: UPDATE_CART,
+    payload: data,
+  };
+};
+
+const updateSelectedAddress = (data) => {
+  return {
+    type: UPDATE_SELECTED_ADDRESS,
     payload: data,
   };
 };
@@ -105,5 +113,6 @@ export {
   setAuthUser,
   updateAddressList,
   updateCartAction,
+  updateSelectedAddress,
   updateSideMenuState,
 };
