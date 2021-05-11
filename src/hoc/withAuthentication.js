@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setAuthUser, updateCartAction } from './../actions';
+import { setAuthUser, updateAddressList, updateCartAction } from './../actions';
 
 import FirebaseContext from './../context/firebase';
 
@@ -15,10 +15,11 @@ const withAuthentication = (Component) => {
     };
 
     const next = (authUser) => {
-      const { cart, ...rest } = authUser;
+      const { cart, addressList, ...rest } = authUser;
       saveToLocalStorage(rest);
       dispatch(setAuthUser(rest));
       dispatch(updateCartAction(cart));
+      dispatch(updateAddressList(addressList));
     };
 
     const fallback = () => {

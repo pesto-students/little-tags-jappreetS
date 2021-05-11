@@ -35,10 +35,30 @@ const SIDE_MENU_OTHER_PAGES = [
   },
 ];
 
+const STATES = [
+  {
+    value: 'delhi',
+    label: 'Delhi',
+  },
+  {
+    value: 'karnataka',
+    label: 'Karnataka',
+  },
+  {
+    value: 'maharashtra',
+    label: 'Maharashtra',
+  },
+  {
+    value: 'rajasthan',
+    label: 'Rajasthan',
+  },
+];
+
 export {
   API_BASE_URL,
   GITHUB_PROFILE,
   LINKEDIN_PROFILE,
   CATEGORIES,
   SIDE_MENU_OTHER_PAGES,
+  STATES,
 };

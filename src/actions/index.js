@@ -7,6 +7,7 @@ import {
   SET_AUTH_USER,
   UPDATE_CART,
   UPDATE_SIDE_MENU_STATE,
+  UPDATE_ADDRESS_LIST,
 } from './../constants/actionTypes';
 
 const getAllCategoriesAction = () => {
@@ -69,6 +70,13 @@ const getProductDetailByIdAction = (id) => {
   };
 };
 
+const updateAddressList = (data) => {
+  return {
+    type: UPDATE_ADDRESS_LIST,
+    payload: data,
+  };
+};
+
 const setAuthUser = (authUser) => {
   return {
     type: SET_AUTH_USER,
@@ -95,6 +103,7 @@ export {
   getProductsByCategoryIdAction,
   getProductDetailByIdAction,
   setAuthUser,
+  updateAddressList,
   updateCartAction,
   updateSideMenuState,
 };
