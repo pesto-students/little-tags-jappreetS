@@ -1,7 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setAuthUser, updateAddressList, updateCartAction } from './../actions';
+import {
+  setAuthUser,
+  updateAddressList,
+  updateCartAction,
+  updateSelectedAddress,
+} from './../actions';
 
 import FirebaseContext from './../context/firebase';
 
@@ -20,6 +25,7 @@ const withAuthentication = (Component) => {
       dispatch(setAuthUser(rest));
       dispatch(updateCartAction(cart));
       dispatch(updateAddressList(addressList));
+      dispatch(updateSelectedAddress(addressList[0]));
     };
 
     const fallback = () => {

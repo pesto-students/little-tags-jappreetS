@@ -16,7 +16,7 @@ import './Header.scss';
 const Header = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const cart = useSelector((state) => state.cartState.cart);
+  const cart = useSelector((state) => state.cart.data);
   const authUser = useSelector((state) => state.sessionState.authUser);
   const isSideMenuOpen = useSelector(
     (state) => state.sideMenuState.isSideMenuOpen

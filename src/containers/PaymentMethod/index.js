@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import React, { useContext, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+import { saveOrderDetails, updateCartAction } from '../../actions';
 import { THANK_YOU } from '../../constants/routes';
+import FirebaseContext from '../../context/firebase';
+import useFetchOrdersCount from '../../hooks/useFetchOrdersCount';
+import useFetchUserInfo from '../../hooks/useFetchUserInfo';
 
 import Button from '../../components/Button';
 import RadioButton from '../../components/RadioButton';
@@ -10,12 +14,40 @@ import RadioButton from '../../components/RadioButton';
 import './PaymentMethod.scss';
 
 const PaymentMethod = () => {
+  const firebase = useContext(FirebaseContext);
+  const dispatch = useDispatch();
   const history = useHistory();
+  const cart = useSelector((state) => state.cart.data);
   const selectedAddress = useSelector((state) => state.selectedAddress.address);
   const [selectedPaymentMode, setSelectedPaymentMode] = useState('1');
+  const authUser = useSelector((state) => state.sessionState.authUser);
+  let { ordersCount } = useFetchOrdersCount();
+  const { userInfo } = useFetchUserInfo();
 
   const handleChange = (event) => {
     setSelectedPaymentMode(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    const updatedOrderCount = ++ordersCount;
+    const orderDetails = {
+      orderId: updatedOrderCount,
+      cart,
+      address: selectedAddress,
+    };
+    const ordersListData = [];
+    ordersListData.push(orderDetails);
+    if (!!userInfo) {
+      firebase.user(authUser.uid).set({
+        ...userInfo,
+        cart: [],
+        orders: ordersListData,
+      });
+      firebase.ordersCount().set(updatedOrderCount);
+      dispatch(saveOrderDetails(ordersListData));
+      dispatch(updateCartAction([]));
+    }
+    history.push(THANK_YOU);
   };
 
   return (
@@ -61,7 +93,7 @@ const PaymentMethod = () => {
         isCenter
         label="PROCEED TO PAYMENT"
         varient="secondary"
-        onClick={() => history.push(THANK_YOU)}
+        onClick={handleSubmit}
       />
     </div>
   );

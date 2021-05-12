@@ -25,6 +25,8 @@ class Firebase {
 
   user = (uid) => this.db.ref(`user/${uid}`);
 
+  ordersCount = () => this.db.ref('ordersCount');
+
   onAuthChangeListener = (next, fallback = () => {}) => {
     return this.auth.onAuthStateChanged((authUser) => {
       if (authUser) {

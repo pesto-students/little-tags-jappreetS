@@ -4,6 +4,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST,
+  ORDER_DETAILS,
   SET_AUTH_USER,
   UPDATE_ADDRESS_LIST,
   UPDATE_CART,
@@ -71,6 +72,13 @@ const getProductDetailByIdAction = (id) => {
   };
 };
 
+const saveOrderDetails = (data) => {
+  return {
+    type: ORDER_DETAILS,
+    payload: data,
+  };
+};
+
 const setAuthUser = (authUser) => {
   return {
     type: SET_AUTH_USER,
@@ -110,6 +118,7 @@ export {
   getAllCategoriesAction,
   getProductsByCategoryIdAction,
   getProductDetailByIdAction,
+  saveOrderDetails,
   setAuthUser,
   updateAddressList,
   updateCartAction,

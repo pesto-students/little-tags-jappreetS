@@ -37,16 +37,7 @@ const RadioButton = ({
           </label>
         </div>
       )}
-      {/* {variant === 'secondary' && (
-        <div className="RadioButton-address">
-          <div className="RadioButton-address__name">Ayush Jaiswal</div>
-          <div className="RadioButton-address__address">
-            1418 Riverwood Drive, Suite 3245 Cottonwood, DL 110092, India
-          </div>
-          <div className="RadioButton-address__phone">(+91) 9876 543 210</div>
-        </div>
-      )} */}
-      {variant === 'secondary' && (
+      {variant === 'secondary' && !!data && (
         <div className="RadioButton-address">
           <div className="RadioButton-address__name">
             {firstName} {lastName}

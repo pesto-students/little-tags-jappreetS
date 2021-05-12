@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import allCategoriesReducer from './allCategoriesReducer';
 import errorMessagesReducer from './errorMessagesReducer';
+import orderDetailsReducer from './orderDetailsReducer';
 import productDetailReducer from './productDetailReducer';
 import productsListReducer from './productsListReducer';
 import sessionReducer from './sessionReducer';
@@ -13,8 +14,9 @@ import updatedSelectedAddressReducer from './updatedSelectedAddressReducer';
 const rootReducer = combineReducers({
   addressList: updateAddressListReducer,
   allCategories: allCategoriesReducer,
-  cartState: updateCartReducer,
+  cart: updateCartReducer,
   errorMessages: errorMessagesReducer,
+  orderDetails: orderDetailsReducer,
   productDetail: productDetailReducer,
   productsList: productsListReducer,
   selectedAddress: updatedSelectedAddressReducer,

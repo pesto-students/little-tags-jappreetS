@@ -11,7 +11,7 @@ import './Cart.scss';
 
 const Cart = () => {
   const history = useHistory();
-  const cart = useSelector((state) => state.cartState.cart);
+  const cart = useSelector((state) => state.cart.data);
 
   return (
     <div className="Cart">

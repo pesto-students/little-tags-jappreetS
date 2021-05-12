@@ -50,7 +50,7 @@ const ProductDetail = () => {
   const location = useLocation();
   const product = useSelector((state) => state.productDetail.product);
   const authUser = useSelector((state) => state.sessionState.authUser);
-  const cart = useSelector((state) => state.cartState.cart);
+  const cart = useSelector((state) => state.cart.data);
   const [count, setCount] = useState(0);
 
   const { description, id, image, price, title } = !!product && product;
