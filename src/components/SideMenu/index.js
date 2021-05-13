@@ -6,7 +6,7 @@ import FirebaseContext from './../../context/firebase';
 import { SIDE_MENU_OTHER_PAGES } from './../../constants';
 import { PRODUCT_LIST } from './../../constants/routes';
 
-import { updateSideMenuState } from './../../actions';
+import { updateCartAction, updateSideMenuState } from './../../actions';
 
 import Button from './../Button';
 import Icon from './../../elements/Icon';
@@ -34,6 +34,7 @@ const SideMenu = (props) => {
 
   const handleSignOut = () => {
     firebase.doSignOut();
+    dispatch(updateCartAction([]));
     handleCloseSideMenuClick();
   };
 
