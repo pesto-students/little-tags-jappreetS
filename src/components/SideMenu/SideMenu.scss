@@ -45,7 +45,9 @@ $root: '.SideMenu';
         margin: 0;
       }
       ul.categories {
-        border-bottom: 1px solid #707070;
+        &.show-border {
+          border-bottom: 1px solid #707070;
+        }
       }
       ul.categories,
       ul.other-pages {

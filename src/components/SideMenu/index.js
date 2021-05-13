@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import FirebaseContext from './../../context/firebase';
 import { SIDE_MENU_OTHER_PAGES } from './../../constants';
 import { PRODUCT_LIST } from './../../constants/routes';
+import useIsLoggedIn from '../../hooks/useIsLoggedIn';
 
 import { updateCartAction, updateSideMenuState } from './../../actions';
 
@@ -16,6 +17,7 @@ import './SideMenu.scss';
 const SideMenu = (props) => {
   const firebase = useContext(FirebaseContext);
   const dispatch = useDispatch();
+  const isLoggedIn = useIsLoggedIn();
   const isSideMenuOpen = useSelector(
     (state) => state.sideMenuState.isSideMenuOpen
   );
@@ -87,8 +89,10 @@ const SideMenu = (props) => {
         )}
         <div className="SideMenu-top__menuItems">
           <div className="categoriesTitle">CATEGORIES</div>
-          <ul className="categories">{categories}</ul>
-          <ul className="other-pages">{otherPages}</ul>
+          <ul className={`categories ${!!isLoggedIn ? 'show-border' : ''}`}>
+            {categories}
+          </ul>
+          {!!isLoggedIn && <ul className="other-pages">{otherPages}</ul>}
         </div>
       </div>
       {!!userFirstName && (
