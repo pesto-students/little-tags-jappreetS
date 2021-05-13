@@ -25,7 +25,9 @@ const withAuthentication = (Component) => {
       dispatch(setAuthUser(rest));
       dispatch(updateCartAction(cart));
       dispatch(updateAddressList(addressList));
-      dispatch(updateSelectedAddress(addressList[0]));
+      !!addressList &&
+        addressList.length > 0 &&
+        dispatch(updateSelectedAddress(addressList[0]));
     };
 
     const fallback = () => {

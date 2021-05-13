@@ -17,11 +17,13 @@ const SelectAddress = () => {
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
   const addressList = useSelector((state) => state.addressList.addresses);
   const [selectedAddress, setSelectedAddress] = useState(
-    addressList[selectedAddressIndex]
+    !!addressList && addressList.length > 0 && addressList[selectedAddressIndex]
   );
 
   useEffect(() => {
-    setSelectedAddress(addressList[selectedAddressIndex]);
+    !!addressList &&
+      addressList.length > 0 &&
+      setSelectedAddress(addressList[selectedAddressIndex]);
   }, [addressList, selectedAddressIndex]);
 
   const handleChange = (event) => {
@@ -38,18 +40,20 @@ const SelectAddress = () => {
     <div className="SelectAddress">
       <h1 className="SelectAddress-title text-align-center">Deliver To</h1>
       <div className="SelectAddress-addressList d-flex flex-direction-col align-items-center">
-        {addressList.map((address, index) => (
-          <RadioButton
-            key={index}
-            id={index}
-            isSelected={selectedAddressIndex === index}
-            label=""
-            data={address}
-            value={index}
-            variant="secondary"
-            onChange={handleChange}
-          />
-        ))}
+        {!!addressList &&
+          addressList.length > 0 &&
+          addressList.map((address, index) => (
+            <RadioButton
+              key={index}
+              id={index}
+              isSelected={selectedAddressIndex === index}
+              label=""
+              data={address}
+              value={index}
+              variant="secondary"
+              onChange={handleChange}
+            />
+          ))}
       </div>
       <div
         role="button"
@@ -65,13 +69,15 @@ const SelectAddress = () => {
         />
         ADD NEW ADDRESS
       </div>
-      <Button
-        isCenter
-        label="PROCEED"
-        varient="secondary"
-        // onClick={() => history.push(SELECT_PAYMENT_METHOD)}
-        onClick={handleProceed}
-      />
+      {!!addressList && addressList.length > 0 && (
+        <Button
+          isCenter
+          label="PROCEED"
+          varient="secondary"
+          // onClick={() => history.push(SELECT_PAYMENT_METHOD)}
+          onClick={handleProceed}
+        />
+      )}
     </div>
   );
 };
