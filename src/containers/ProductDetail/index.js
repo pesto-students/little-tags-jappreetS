@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { PRODUCT_SIZES } from '../../constants';
 import { CART } from '../../constants/routes';
 import FirebaseContext from '../../context/firebase';
 
@@ -15,34 +16,6 @@ import PopularProducts from '../../components/PopularProducts';
 
 import './ProductDetail.scss';
 
-const sizes = [
-  {
-    id: 'xs',
-    label: 'XS',
-    disable: false,
-  },
-  {
-    id: 's',
-    label: 'S',
-    disable: true,
-  },
-  {
-    id: 'm',
-    label: 'M',
-    disable: true,
-  },
-  {
-    id: 'l',
-    label: 'L',
-    disable: false,
-  },
-  {
-    id: 'xl',
-    label: 'XL',
-    disable: false,
-  },
-];
-
 const ProductDetail = () => {
   const firebase = useContext(FirebaseContext);
   const dispatch = useDispatch();
@@ -53,9 +26,11 @@ const ProductDetail = () => {
   const cart = useSelector((state) => state.cart.data);
   const [count, setCount] = useState(0);
 
-  const { description, id, image, price, title } = !!product && product;
-
+  const { category, description, id, image, price, title } =
+    !!product && product;
   const images = Array(5).fill(image);
+  const showProductSizes =
+    category === "men's clothing" || category === "women's clothing";
 
   useEffect(() => {
     const currentProduct =
@@ -104,19 +79,21 @@ const ProductDetail = () => {
               <div className="ProductDetail-details__description">
                 <p>{description}</p>
               </div>
-              <div className="ProductDetail-details__sizes">
-                <div className="title">Size</div>
-                {sizes.map(({ id, label, disable }) => (
-                  <span
-                    key={id}
-                    className={`size cursor-pointer ${
-                      !!disable ? 'disabled' : ''
-                    }`}
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
+              {showProductSizes && (
+                <div className="ProductDetail-details__sizes">
+                  <div className="title">Size</div>
+                  {PRODUCT_SIZES.map(({ id, label, disable }) => (
+                    <span
+                      key={id}
+                      className={`size cursor-pointer ${
+                        !!disable ? 'disabled' : ''
+                      }`}
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
+              )}
               <div className="ProductDetail-details__quantity">
                 <div className="title">Quantity</div>
                 <Counter count={count} onCountChange={handleCartUpdate} />

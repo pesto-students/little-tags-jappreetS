@@ -22,6 +22,34 @@ const CATEGORIES = [
   },
 ];
 
+const PRODUCT_SIZES = [
+  {
+    id: 'xs',
+    label: 'XS',
+    disable: false,
+  },
+  {
+    id: 's',
+    label: 'S',
+    disable: false,
+  },
+  {
+    id: 'm',
+    label: 'M',
+    disable: false,
+  },
+  {
+    id: 'l',
+    label: 'L',
+    disable: false,
+  },
+  {
+    id: 'xl',
+    label: 'XL',
+    disable: false,
+  },
+];
+
 const SIDE_MENU_OTHER_PAGES = [
   {
     id: 'pastOrders',
@@ -59,6 +87,7 @@ export {
   GITHUB_PROFILE,
   LINKEDIN_PROFILE,
   CATEGORIES,
+  PRODUCT_SIZES,
   SIDE_MENU_OTHER_PAGES,
   STATES,
 };
