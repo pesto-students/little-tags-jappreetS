@@ -6,8 +6,8 @@ import { PRODUCT_DETAIL } from '../../constants/routes';
 
 import { getProductsByCategoryIdAction } from './../../actions';
 
+// import Pagination from './../../components/Pagination';
 import ProductListItem from './../../components/ProductListItem';
-import Pagination from './../../components/Pagination';
 
 import './ProductsList.scss';
 
@@ -39,7 +39,7 @@ const ProductsList = () => {
             onClick={() => history.push(`${PRODUCT_DETAIL}/${product.id}`)}
           />
         ))}
-      <Pagination currentPage={2} pageCount={6} />
+      {/* <Pagination currentPage={2} pageCount={6} /> */}
     </div>
   );
 };
