@@ -29,21 +29,21 @@ const Cart = () => {
             />
           ))}
       </div>
-      {isCartNotEmpty ? (
+      {isCartNotEmpty && (
         <Button
+          className="mb-16"
           isCenter
           label="PROCEED"
           varient="secondary"
           onClick={() => history.push(SELECT_ADDRESS)}
         />
-      ) : (
-        <Button
-          isCenter
-          label="CONTINUE SHOPPING"
-          varient="secondary"
-          onClick={() => history.push(HOME)}
-        />
       )}
+      <Button
+        isCenter
+        label="CONTINUE SHOPPING"
+        varient="secondary"
+        onClick={() => history.push(HOME)}
+      />
     </div>
   );
 };

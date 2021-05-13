@@ -13,6 +13,7 @@ import Button from '../../components/Button';
 import Counter from '../../components/Counter';
 import ProductSlider from '../../components/ProductSlider';
 import PopularProducts from '../../components/PopularProducts';
+import ErrorMessage from '../../elements/ErrorMessage';
 
 import './ProductDetail.scss';
 
@@ -25,6 +26,8 @@ const ProductDetail = () => {
   const authUser = useSelector((state) => state.sessionState.authUser);
   const cart = useSelector((state) => state.cart.data);
   const [count, setCount] = useState(0);
+  const [showCountErrorMessage, setShowCountErrorMessage] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(PRODUCT_SIZES[2].id);
 
   const { category, description, id, image, price, title } =
     !!product && product;
@@ -50,6 +53,7 @@ const ProductDetail = () => {
 
   const handleCartUpdate = (count) => {
     setCount(count);
+    showCountErrorMessage && setShowCountErrorMessage(false);
     const cartData = { id, image, price, title, count };
     const cartArr = [];
 
@@ -61,8 +65,16 @@ const ProductDetail = () => {
     dispatch(updateCartAction(cartArr));
   };
 
+  const handleProductSizeClick = (size) => {
+    setSelectedSize(size);
+  };
+
   const handleSubmit = () => {
-    history.push(CART);
+    if (!!cart && cart.length > 0) {
+      history.push(CART);
+    } else {
+      setShowCountErrorMessage(true);
+    }
   };
 
   return (
@@ -86,8 +98,9 @@ const ProductDetail = () => {
                     <span
                       key={id}
                       className={`size cursor-pointer ${
-                        !!disable ? 'disabled' : ''
-                      }`}
+                        selectedSize === id ? 'highlight-size' : ''
+                      } ${!!disable ? 'disabled' : ''}`}
+                      onClick={() => handleProductSizeClick(id)}
                     >
                       {label}
                     </span>
@@ -97,9 +110,12 @@ const ProductDetail = () => {
               <div className="ProductDetail-details__quantity">
                 <div className="title">Quantity</div>
                 <Counter count={count} onCountChange={handleCartUpdate} />
+                {showCountErrorMessage && (
+                  <ErrorMessage message="Add atleast 1 product" />
+                )}
               </div>
               <Button
-                iconName={count > 0 ? 'cart' : ''}
+                iconName="cart"
                 isBlack={false}
                 isLeftAlign
                 label="PROCEED"

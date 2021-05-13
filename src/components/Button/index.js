@@ -9,6 +9,7 @@ const Button = ({
   iconName,
   isBlack = true,
   isCenter = false,
+  isDisabled = false,
   isFullWidth = false,
   label,
   varient = 'primary',
@@ -18,7 +19,9 @@ const Button = ({
     <button
       className={`Button cursor-pointer d-flex align-items-center justify-content-center Button-${varient} Button-width-${
         !!isFullWidth ? 'full' : 'limit'
-      } ${!!isCenter ? 'Button-isCenter' : ''} ${!!className ? className : ''}`}
+      } ${!!isCenter ? 'Button-isCenter' : ''} ${
+        !!isDisabled ? 'disabled' : ''
+      } ${!!className ? className : ''}`}
       onClick={onClick}
     >
       {!!iconName && (
