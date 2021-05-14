@@ -1,8 +1,9 @@
 import React from 'react';
+import ErrorMessage from '../ErrorMessage';
 
 import './Select.scss';
 
-const Select = ({ id, label, options, value, onChange }) => {
+const Select = ({ errorMessage, id, label, options, value, onChange }) => {
   return (
     <div className="Select d-flex flex-direction-col">
       <label className="Select-label">{label}</label>
@@ -20,6 +21,7 @@ const Select = ({ id, label, options, value, onChange }) => {
           </option>
         ))}
       </select>
+      {!!errorMessage && <ErrorMessage message={errorMessage} />}
     </div>
   );
 };

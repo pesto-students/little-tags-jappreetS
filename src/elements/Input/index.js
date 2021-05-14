@@ -1,8 +1,17 @@
 import React from 'react';
 
+import ErrorMessage from '../../elements/ErrorMessage';
+
 import './Input.scss';
 
-const Input = ({ id, label, type = 'text', value, onChange = () => {} }) => {
+const Input = ({
+  errorMessage,
+  id,
+  label,
+  type = 'text',
+  value,
+  onChange = () => {},
+}) => {
   return (
     <div className="Input d-flex flex-direction-col">
       <label className="Input-label">{label}</label>
@@ -12,6 +21,7 @@ const Input = ({ id, label, type = 'text', value, onChange = () => {} }) => {
         value={value}
         onChange={(event) => onChange(id, event.target.value)}
       />
+      {!!errorMessage && <ErrorMessage message={errorMessage} />}
     </div>
   );
 };

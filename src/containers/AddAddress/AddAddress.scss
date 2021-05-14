@@ -16,6 +16,9 @@ $root: '.AddAddress';
       .Select {
         margin-bottom: 16px;
       }
+      .ErrorMessage {
+        margin-bottom: 0;
+      }
     }
     &__left {
       margin-right: 80px;
