@@ -8,13 +8,10 @@ const Counter = ({ count = 0, isCart = false, onCountChange }) => {
   const [countValue, setCountValue] = useState(count);
   const initialRender = useRef(true);
 
-  const handleCount = (mode) => {
-    if (mode === 'increment') {
-      setCountValue((c) => c + 1);
-    } else {
-      countValue >= 1 && setCountValue((c) => c - 1);
-    }
-  };
+  useEffect(() => {
+    setCountValue(count);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
 
   useEffect(() => {
     if (initialRender.current) {
@@ -22,9 +19,16 @@ const Counter = ({ count = 0, isCart = false, onCountChange }) => {
     } else {
       onCountChange(countValue);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countValue]);
+
+  const handleCount = (mode) => {
+    if (mode === 'increment') {
+      setCountValue((c) => c + 1);
+    } else {
+      countValue >= 1 && setCountValue((c) => c - 1);
+    }
+  };
 
   return (
     <div className="Counter d-flex align-items-center">

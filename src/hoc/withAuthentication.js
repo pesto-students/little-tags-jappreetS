@@ -23,11 +23,11 @@ const withAuthentication = (Component) => {
       const { cart, addressList, ...rest } = authUser;
       saveToLocalStorage(rest);
       dispatch(setAuthUser(rest));
-      dispatch(updateCartAction(cart));
-      dispatch(updateAddressList(addressList));
-      !!addressList &&
-        addressList.length > 0 &&
+      !!cart && cart.length > 0 && dispatch(updateCartAction(cart));
+      if (!!addressList && addressList.length > 0) {
+        dispatch(updateAddressList(addressList));
         dispatch(updateSelectedAddress(addressList[0]));
+      }
     };
 
     const fallback = () => {

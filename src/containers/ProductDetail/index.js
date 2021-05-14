@@ -6,8 +6,9 @@ import { PRODUCT_SIZES } from '../../constants';
 import { CART } from '../../constants/routes';
 import FirebaseContext from '../../context/firebase';
 
-import { getUserDetails } from '../../utils/helpers';
+import { getUpdatedCart } from '../../utils/helpers';
 import { getProductDetailByIdAction, updateCartAction } from '../../actions';
+import useFetchUserInfo from '../../hooks/useFetchUserInfo';
 
 import Button from '../../components/Button';
 import Counter from '../../components/Counter';
@@ -22,9 +23,10 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const product = useSelector((state) => state.productDetail.product);
   const authUser = useSelector((state) => state.sessionState.authUser);
   const cart = useSelector((state) => state.cart.data);
+  const product = useSelector((state) => state.productDetail.product);
+  const { userInfo } = useFetchUserInfo();
   const [count, setCount] = useState(0);
   const [showCountErrorMessage, setShowCountErrorMessage] = useState(false);
   const [selectedSize, setSelectedSize] = useState(PRODUCT_SIZES[2].id);
@@ -37,9 +39,8 @@ const ProductDetail = () => {
 
   useEffect(() => {
     const currentProduct =
-      !!cart && cart.find((item) => item.id === product.id);
+      !!cart && !!product && cart.find((item) => item.id === product.id);
     !!currentProduct && setCount(currentProduct.count);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
@@ -47,7 +48,6 @@ const ProductDetail = () => {
     const pathnameArr = location.pathname.split('/');
     const productId = pathnameArr.slice(-1)[0];
     dispatch(getProductDetailByIdAction(productId));
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
@@ -55,14 +55,14 @@ const ProductDetail = () => {
     setCount(count);
     showCountErrorMessage && setShowCountErrorMessage(false);
     const cartData = { id, image, price, title, count };
-    const cartArr = [];
-
-    count > 0 && cartArr.push(cartData);
-    firebase.user(authUser.uid).set({
-      ...(count > 0 && { cart: cartArr }),
-      ...getUserDetails(authUser),
-    });
-    dispatch(updateCartAction(cartArr));
+    const cartArr = getUpdatedCart(cart, cartData);
+    if (!!userInfo) {
+      firebase.user(authUser.uid).set({
+        ...userInfo,
+        cart: cartArr,
+      });
+      dispatch(updateCartAction(cartArr));
+    }
   };
 
   const handleProductSizeClick = (size) => {

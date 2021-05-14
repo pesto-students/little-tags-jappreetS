@@ -5,8 +5,9 @@ import { useLocation } from 'react-router';
 import { CART } from '../../constants/routes';
 import FirebaseContext from '../../context/firebase';
 
-import { getUserDetails } from '../../utils/helpers';
 import { updateCartAction } from '../../actions';
+import useFetchUserInfo from '../../hooks/useFetchUserInfo';
+import { getUpdatedCart } from '../../utils/helpers';
 
 import Button from './../Button';
 import Counter from './../Counter';
@@ -26,25 +27,28 @@ const ProductListItem = ({
   onImgClick = () => {},
   onOrderAgainClick = () => {},
 }) => {
+  const { count, id, image, price, title } = !!data && data;
   const firebase = useContext(FirebaseContext);
   const dispatch = useDispatch();
   const location = useLocation();
-  const { count, id, image, price, title } = !!data && data;
+  const { userInfo } = useFetchUserInfo();
   const [productCount, setProductCount] = useState(count);
   const authUser = useSelector((state) => state.sessionState.authUser);
+  const cart = useSelector((state) => state.cart.data);
   const isCart = location.pathname.includes(CART);
 
   const handleCartUpdate = (count) => {
     setProductCount(count);
     const cartData = { id, image, price, title, count };
-    const cartArr = [];
 
-    count > 0 && cartArr.push(cartData);
-    firebase.user(authUser.uid).set({
-      ...(count > 0 && { cart: cartArr }),
-      ...getUserDetails(authUser),
-    });
-    dispatch(updateCartAction(cartArr));
+    const cartArr = getUpdatedCart(cart, cartData);
+    if (!!userInfo) {
+      firebase.user(authUser.uid).set({
+        ...userInfo,
+        cart: cartArr,
+      });
+      dispatch(updateCartAction(cartArr));
+    }
   };
 
   return (
