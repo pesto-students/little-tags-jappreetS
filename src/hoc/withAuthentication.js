@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import {
   setAuthUser,
-  updateAddressList,
+  updateAddresses,
   updateCartAction,
   updateOrdersList,
   updateSelectedAddress,
@@ -21,12 +21,12 @@ const withAuthentication = (Component) => {
     };
 
     const next = (authUser) => {
-      const { addressList, cart, orders, ...rest } = authUser;
+      const { addresses, cart, orders, ...rest } = authUser;
       saveToLocalStorage(rest);
       dispatch(setAuthUser(rest));
-      if (!!addressList && addressList.length > 0) {
-        dispatch(updateAddressList(addressList));
-        dispatch(updateSelectedAddress(addressList[0]));
+      if (!!addresses && addresses.length > 0) {
+        dispatch(updateAddresses(addresses));
+        dispatch(updateSelectedAddress(addresses[0]));
       }
       !!cart && cart.length > 0 && dispatch(updateCartAction(cart));
       !!orders && orders.length > 0 && dispatch(updateOrdersList(orders));

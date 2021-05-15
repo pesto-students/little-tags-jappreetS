@@ -15,16 +15,16 @@ const SelectAddress = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
-  const addressList = useSelector((state) => state.addressList.addresses);
+  const addresses = useSelector((state) => state.addresses.data);
   const [selectedAddress, setSelectedAddress] = useState(
-    !!addressList && addressList.length > 0 && addressList[selectedAddressIndex]
+    !!addresses && addresses.length > 0 && addresses[selectedAddressIndex]
   );
 
   useEffect(() => {
-    !!addressList &&
-      addressList.length > 0 &&
-      setSelectedAddress(addressList[selectedAddressIndex]);
-  }, [addressList, selectedAddressIndex]);
+    !!addresses &&
+      addresses.length > 0 &&
+      setSelectedAddress(addresses[selectedAddressIndex]);
+  }, [addresses, selectedAddressIndex]);
 
   const handleChange = (event) => {
     const selectedAddressIndexValue = Number(event.target.value);
@@ -39,10 +39,10 @@ const SelectAddress = () => {
   return (
     <div className="SelectAddress">
       <h1 className="SelectAddress-title text-align-center">Deliver To</h1>
-      <div className="SelectAddress-addressList d-flex flex-direction-col align-items-center">
-        {!!addressList &&
-          addressList.length > 0 &&
-          addressList.map((address, index) => (
+      <div className="SelectAddress-addresses d-flex flex-direction-col align-items-center">
+        {!!addresses &&
+          addresses.length > 0 &&
+          addresses.map((address, index) => (
             <RadioButton
               key={index}
               id={index}
@@ -69,7 +69,7 @@ const SelectAddress = () => {
         />
         ADD NEW ADDRESS
       </div>
-      {!!addressList && addressList.length > 0 && (
+      {!!addresses && addresses.length > 0 && (
         <Button
           isCenter
           label="PROCEED"

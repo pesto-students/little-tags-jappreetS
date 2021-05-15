@@ -1,3 +1,9 @@
+const getUpdatedAddresses = (addresses, addressData) => {
+  const addressesArr = [...addresses];
+  addressesArr.push(addressData);
+  return addressesArr;
+};
+
 const getUpdatedCart = (cart, cartData) => {
   const cartArr = [...cart];
   const indexOfCurrentItem = cart.findIndex((item) => item.id === cartData.id);
@@ -34,6 +40,7 @@ const isObjPropertiesEmpty = (obj) => {
 };
 
 export {
+  getUpdatedAddresses,
   getUpdatedCart,
   getUpdatedOrders,
   getUserDetails,

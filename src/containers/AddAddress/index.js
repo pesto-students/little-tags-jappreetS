@@ -6,8 +6,8 @@ import { SELECT_ADDRESS } from '../../constants/routes';
 import { STATES } from '../../constants';
 import FirebaseContext from '../../context/firebase';
 import useFetchUserInfo from '../../hooks/useFetchUserInfo';
-import { updateAddressList } from '../../actions';
-import { isObjPropertiesEmpty } from '../../utils/helpers';
+import { updateAddresses } from '../../actions';
+import { getUpdatedAddresses, isObjPropertiesEmpty } from '../../utils/helpers';
 
 import Button from './../../components/Button';
 import Input from '../../elements/Input';
@@ -20,6 +20,7 @@ const AddAddress = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const authUser = useSelector((state) => state.sessionState.authUser);
+  const addresses = useSelector((state) => state.addresses.data);
   const { userInfo } = useFetchUserInfo();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -73,7 +74,8 @@ const AddAddress = () => {
       state: '',
       pinCode: '',
     };
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const phoneNumberRegex = /^\d{10,10}$/;
     const pinCodeRegex = /^\d{6,6}$/;
 
@@ -103,15 +105,14 @@ const AddAddress = () => {
   };
 
   const handleSubmit = () => {
-    const addressListData = [];
     if (validateForm()) {
-      addressListData.push(formData);
+      const addressesArr = getUpdatedAddresses(addresses, formData);
       if (!!userInfo) {
         firebase.user(authUser.uid).set({
-          ...{ addressList: addressListData },
           ...userInfo,
+          addresses: addressesArr,
         });
-        dispatch(updateAddressList(addressListData));
+        dispatch(updateAddresses(addressesArr));
       }
       history.push(SELECT_ADDRESS);
     }

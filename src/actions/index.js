@@ -6,7 +6,7 @@ import {
   GET_PRODUCTS_LIST,
   UPDATE_ORDERS_LIST,
   SET_AUTH_USER,
-  UPDATE_ADDRESS_LIST,
+  UPDATE_ADDRESSES,
   UPDATE_CART,
   UPDATE_SELECTED_ADDRESS,
   UPDATE_SIDE_MENU_STATE,
@@ -79,9 +79,9 @@ const setAuthUser = (authUser) => {
   };
 };
 
-const updateAddressList = (data) => {
+const updateAddresses = (data) => {
   return {
-    type: UPDATE_ADDRESS_LIST,
+    type: UPDATE_ADDRESSES,
     payload: data,
   };
 };
@@ -119,7 +119,7 @@ export {
   getProductsByCategoryIdAction,
   getProductDetailByIdAction,
   setAuthUser,
-  updateAddressList,
+  updateAddresses,
   updateCartAction,
   updateOrdersList,
   updateSelectedAddress,
