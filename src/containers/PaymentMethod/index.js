@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { saveOrderDetails, updateCartAction } from '../../actions';
+import { updateOrdersList, updateCartAction } from '../../actions';
 import { THANK_YOU } from '../../constants/routes';
 import FirebaseContext from '../../context/firebase';
 import useFetchOrdersCount from '../../hooks/useFetchOrdersCount';
 import useFetchUserInfo from '../../hooks/useFetchUserInfo';
+import { getUpdatedOrders } from '../../utils/helpers';
 
 import Button from '../../components/Button';
 import RadioButton from '../../components/RadioButton';
@@ -21,6 +22,7 @@ const PaymentMethod = () => {
   const selectedAddress = useSelector((state) => state.selectedAddress.address);
   const [selectedPaymentMode, setSelectedPaymentMode] = useState('1');
   const authUser = useSelector((state) => state.sessionState.authUser);
+  const orders = useSelector((state) => state.ordersList.data);
   let { ordersCount } = useFetchOrdersCount();
   const { userInfo } = useFetchUserInfo();
 
@@ -35,16 +37,15 @@ const PaymentMethod = () => {
       cart,
       address: selectedAddress,
     };
-    const ordersListData = [];
-    ordersListData.push(orderDetails);
+    const ordersArr = getUpdatedOrders(orders, orderDetails);
     if (!!userInfo) {
       firebase.user(authUser.uid).set({
         ...userInfo,
         cart: [],
-        orders: ordersListData,
+        orders: ordersArr,
       });
       firebase.ordersCount().set(updatedOrderCount);
-      dispatch(saveOrderDetails(ordersListData));
+      dispatch(updateOrdersList(ordersArr));
       dispatch(updateCartAction([]));
     }
     history.push(THANK_YOU);

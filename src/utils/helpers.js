@@ -12,6 +12,12 @@ const getUpdatedCart = (cart, cartData) => {
   return cartArr;
 };
 
+const getUpdatedOrders = (orders, orderData) => {
+  const ordersArr = [...orders];
+  ordersArr.push(orderData);
+  return ordersArr;
+};
+
 const getUserDetails = (userObj) => {
   return {
     email: userObj.email,
@@ -27,4 +33,9 @@ const isObjPropertiesEmpty = (obj) => {
   return true;
 };
 
-export { getUpdatedCart, getUserDetails, isObjPropertiesEmpty };
+export {
+  getUpdatedCart,
+  getUpdatedOrders,
+  getUserDetails,
+  isObjPropertiesEmpty,
+};

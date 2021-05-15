@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import allCategoriesReducer from './allCategoriesReducer';
 import errorMessagesReducer from './errorMessagesReducer';
-import orderDetailsReducer from './orderDetailsReducer';
+import ordersListReducer from './ordersListReducer';
 import productDetailReducer from './productDetailReducer';
 import productsListReducer from './productsListReducer';
 import sessionReducer from './sessionReducer';
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   allCategories: allCategoriesReducer,
   cart: updateCartReducer,
   errorMessages: errorMessagesReducer,
-  orderDetails: orderDetailsReducer,
+  ordersList: ordersListReducer,
   productDetail: productDetailReducer,
   productsList: productsListReducer,
   selectedAddress: updatedSelectedAddressReducer,

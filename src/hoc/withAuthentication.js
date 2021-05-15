@@ -5,6 +5,7 @@ import {
   setAuthUser,
   updateAddressList,
   updateCartAction,
+  updateOrdersList,
   updateSelectedAddress,
 } from './../actions';
 
@@ -20,14 +21,15 @@ const withAuthentication = (Component) => {
     };
 
     const next = (authUser) => {
-      const { cart, addressList, ...rest } = authUser;
+      const { addressList, cart, orders, ...rest } = authUser;
       saveToLocalStorage(rest);
       dispatch(setAuthUser(rest));
-      !!cart && cart.length > 0 && dispatch(updateCartAction(cart));
       if (!!addressList && addressList.length > 0) {
         dispatch(updateAddressList(addressList));
         dispatch(updateSelectedAddress(addressList[0]));
       }
+      !!cart && cart.length > 0 && dispatch(updateCartAction(cart));
+      !!orders && orders.length > 0 && dispatch(updateOrdersList(orders));
     };
 
     const fallback = () => {

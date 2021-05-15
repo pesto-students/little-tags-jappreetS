@@ -1,12 +1,12 @@
 import * as ACTIONS_TYPES from '../constants/actionTypes';
 
 const initialState = {
-  data: null,
+  data: [],
 };
 
-const orderDetailsReducer = (state = initialState, action) => {
+const ordersListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTIONS_TYPES.ORDER_DETAILS:
+    case ACTIONS_TYPES.UPDATE_ORDERS_LIST:
       return {
         ...state,
         data: action.payload,
@@ -16,4 +16,4 @@ const orderDetailsReducer = (state = initialState, action) => {
   }
 };
 
-export default orderDetailsReducer;
+export default ordersListReducer;
