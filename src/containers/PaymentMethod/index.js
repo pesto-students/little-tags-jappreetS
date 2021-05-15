@@ -22,7 +22,7 @@ const PaymentMethod = () => {
   const selectedAddress = useSelector((state) => state.selectedAddress.address);
   const [selectedPaymentMode, setSelectedPaymentMode] = useState('1');
   const authUser = useSelector((state) => state.sessionState.authUser);
-  const orders = useSelector((state) => state.ordersList.data);
+  const orders = useSelector((state) => state.orders.data);
   let { ordersCount } = useFetchOrdersCount();
   const { userInfo } = useFetchUserInfo();
 

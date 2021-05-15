@@ -4,7 +4,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST,
-  UPDATE_ORDERS_LIST,
+  UPDATE_ORDERS,
   SET_AUTH_USER,
   UPDATE_ADDRESSES,
   UPDATE_CART,
@@ -95,7 +95,7 @@ const updateCartAction = (data) => {
 
 const updateOrdersList = (data) => {
   return {
-    type: UPDATE_ORDERS_LIST,
+    type: UPDATE_ORDERS,
     payload: data,
   };
 };

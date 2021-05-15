@@ -23,7 +23,6 @@ const Cart = () => {
             <ProductListItem
               key={product.id}
               data={product}
-              showBorder={false}
               showCounter
               onImgClick={() => history.push(`${PRODUCT_DETAIL}/${product.id}`)}
             />
