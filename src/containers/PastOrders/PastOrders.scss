@@ -1,0 +1,11 @@
+$root: '.PastOrders';
+
+#{$root} {
+  padding-top: 60px;
+  &-title {
+    margin-bottom: 40px;
+  }
+  &-itemsList {
+    margin-bottom: 120px;
+  }
+}

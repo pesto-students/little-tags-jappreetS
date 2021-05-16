@@ -1,0 +1,40 @@
+$root: '.Header';
+
+#{$root} {
+  padding: 20px 48px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: transparent;
+  z-index: 9;
+
+  &-left {
+    &__title {
+      font-size: 28px;
+      font-weight: bold;
+    }
+  }
+
+  &-right {
+    &__name,
+    &__link {
+      font-size: 20px;
+    }
+    &__cartIcon {
+      position: relative;
+      .count {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #f00;
+        color: #fff;
+        font-size: 12px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        right: -10px;
+        top: -7px;
+      }
+    }
+  }
+}

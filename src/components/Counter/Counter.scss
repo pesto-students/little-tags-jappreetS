@@ -1,0 +1,29 @@
+$root: '.Counter';
+
+#{$root} {
+  height: 36px;
+  font-size: 20px;
+  &-btn {
+    font-size: 24px;
+    height: 100%;
+    border: 1px solid #000;
+    padding: 0 12px;
+    cursor: pointer;
+    &:first-child {
+      border-right: none;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    &:last-child {
+      border-left: none;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+  &-count {
+    height: 100%;
+    line-height: 36px;
+    padding: 0 20px;
+    border: 1px solid #000;
+  }
+}

@@ -1,0 +1,19 @@
+$root: '.SelectAddress';
+
+#{$root} {
+  padding-top: 60px;
+  &-title {
+    margin-bottom: 40px;
+  }
+  &-addresses {
+    .RadioButton {
+      margin-bottom: 24px;
+      &:last-child {
+        margin-bottom: 32px;
+      }
+    }
+  }
+  &-addAddress {
+    margin-bottom: 32px;
+  }
+}

@@ -1,0 +1,27 @@
+$root: '.Select';
+
+#{$root} {
+  &-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  &-selectArea {
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url('./../../global/assets/icons/arrow-down.svg');
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 16px);
+    background-position-y: 50%;
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 48px;
+    font-size: 20px;
+    padding: 0 16px;
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 5px #000;
+    }
+  }
+}

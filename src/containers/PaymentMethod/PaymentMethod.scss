@@ -1,0 +1,22 @@
+$root: '.PaymentMethod';
+
+#{$root} {
+  padding-top: 60px;
+  &-title {
+    margin-bottom: 40px;
+  }
+  &-selectedAddress {
+    margin-bottom: 40px;
+  }
+  &-paymentMethods {
+    margin-bottom: 40px;
+    &__title {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    &__options {
+      width: 300px;
+      padding-left: 28px;
+    }
+  }
+}

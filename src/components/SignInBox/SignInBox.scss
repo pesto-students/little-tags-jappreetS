@@ -1,0 +1,12 @@
+$root: '.SignInBox';
+
+#{$root} {
+  width: 634px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 60px;
+
+  &-info {
+    margin-bottom: 32px;
+  }
+}

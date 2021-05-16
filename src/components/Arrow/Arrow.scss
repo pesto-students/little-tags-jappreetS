@@ -1,0 +1,21 @@
+$root: '.Arrow';
+
+#{$root} {
+  position: absolute;
+  top: 50%;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #000;
+  cursor: pointer;
+  transition: transform ease-in 0.1s;
+  box-shadow: 0 0 5px #fff;
+  &:hover {
+    transform: scale(1.1);
+  }
+  img {
+    &:focus {
+      outline: 0;
+    }
+  }
+}
