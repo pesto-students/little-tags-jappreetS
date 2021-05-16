@@ -4,10 +4,11 @@ import {
   GET_ALL_CATEGORIES,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_LIST,
-  UPDATE_ORDERS,
   SET_AUTH_USER,
   UPDATE_ADDRESSES,
   UPDATE_CART,
+  UPDATE_LOADER_STATE,
+  UPDATE_ORDERS,
   UPDATE_SELECTED_ADDRESS,
   UPDATE_SIDE_MENU_STATE,
 } from './../constants/actionTypes';
@@ -93,6 +94,13 @@ const updateCartAction = (data) => {
   };
 };
 
+const updateLoaderState = (data) => {
+  return {
+    type: UPDATE_LOADER_STATE,
+    payload: data,
+  };
+};
+
 const updateOrdersList = (data) => {
   return {
     type: UPDATE_ORDERS,
@@ -121,6 +129,7 @@ export {
   setAuthUser,
   updateAddresses,
   updateCartAction,
+  updateLoaderState,
   updateOrdersList,
   updateSelectedAddress,
   updateSideMenuState,

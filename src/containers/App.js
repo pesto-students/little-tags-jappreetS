@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as ROUTES from './../constants/routes';
 
@@ -22,20 +22,29 @@ import WishList from './WishList';
 
 import Footer from './../components/Footer';
 import Header from './../components/Header';
+import Loader from '../elements/Loader';
 
 import './../global/styles/common.scss';
 
 const App = () => {
   const dispatch = useDispatch();
+  const loaderState = useSelector((state) => state.loaderState.data);
 
   useEffect(() => {
     dispatch(getAllCategoriesAction());
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (loaderState) {
+      document.body.classList.add('scroll-lock');
+    } else {
+      document.body.classList.remove('scroll-lock');
+    }
+  }, [loaderState]);
+
   return (
-    <div>
+    <>
       <Header />
       <div className="container">
         <Switch>
@@ -75,7 +84,8 @@ const App = () => {
         </Switch>
       </div>
       <Footer />
-    </div>
+      {loaderState && <Loader />}
+    </>
   );
 };
 
