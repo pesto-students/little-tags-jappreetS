@@ -21,7 +21,6 @@ const ProductsList = () => {
     const pathnameArr = location.pathname.split('/');
     const categoryId = pathnameArr.slice(-1)[0];
     dispatch(getProductsByCategoryIdAction(categoryId));
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 

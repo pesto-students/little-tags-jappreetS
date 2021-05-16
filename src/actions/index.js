@@ -35,11 +35,13 @@ const getAllCategoriesAction = () => {
 
 const getProductsByCategoryIdAction = (id) => {
   return async (dispatch) => {
+    dispatch(updateLoaderState(true));
     const res = await REQUEST({
       method: 'GET',
       url: `/products/category/${id}`,
     });
     if (!!res.status) {
+      dispatch(updateLoaderState(false));
       dispatch({
         type: GET_PRODUCTS_LIST,
         payload: res.data,
@@ -55,11 +57,13 @@ const getProductsByCategoryIdAction = (id) => {
 
 const getProductDetailByIdAction = (id) => {
   return async (dispatch) => {
+    dispatch(updateLoaderState(true));
     const res = await REQUEST({
       method: 'GET',
       url: `/products/${id}`,
     });
     if (!!res.status) {
+      dispatch(updateLoaderState(false));
       dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: res.data,

@@ -23,6 +23,7 @@ const REQUEST = (config) => {
     (error) => {
       if (error.response.status === 401) {
         // logout
+        console.log('error.response::: ', error.response);
       }
       if (error.response.status === 404 || error.response.status === 400) {
         return error.response;
