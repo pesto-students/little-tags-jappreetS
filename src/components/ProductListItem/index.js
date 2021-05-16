@@ -47,8 +47,8 @@ const ProductListItem = ({
         ...userInfo,
         cart: cartArr,
       });
-      dispatch(updateCartAction(cartArr));
     }
+    dispatch(updateCartAction(cartArr));
   };
 
   return (
