@@ -30,6 +30,8 @@ const ProductDetail = () => {
   const [count, setCount] = useState(0);
   const [showCountErrorMessage, setShowCountErrorMessage] = useState(false);
   const [selectedSize, setSelectedSize] = useState(PRODUCT_SIZES[2].id);
+  const pathnameArr = location.pathname.split('/');
+  const productId = pathnameArr.slice(-1)[0];
 
   const { category, description, id, image, price, title } =
     !!product && product;
@@ -42,14 +44,12 @@ const ProductDetail = () => {
       !!cart && !!product && cart.find((item) => item.id === product.id);
     !!currentProduct && setCount(currentProduct.count);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart]);
+  }, [cart, product]);
 
   useEffect(() => {
-    const pathnameArr = location.pathname.split('/');
-    const productId = pathnameArr.slice(-1)[0];
     dispatch(getProductDetailByIdAction(productId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count]);
+  }, [productId]);
 
   const handleCartUpdate = (count) => {
     setCount(count);
